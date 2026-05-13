@@ -1,0 +1,45 @@
+@font-face {
+  font-family: "Poppins";
+  src: url("./assets/fonts/Poppins-Regular.ttf") format("truetype");
+}
+
+:root {
+  /* typography */
+  --text-small: clamp(0.775rem, 1.8vw, 1rem);
+  --text-medium: clamp(0.7rem, 2.2vw, 1.1rem);
+  --text-large: clamp(2rem, 4.5vw, 3rem);
+
+  /*  colours */
+  --primary-color: #0a0a0a;
+  --secondary-color: #171717;
+  --tertiary-color: #212121;
+  --text-color-one: #f3f3f3;
+  --text-color-two: #919191;
+  --hover-color-one: #3f3f46;
+  --hover-color-two: #e9e3e3;
+  --border-color: #333333;
+  --border-radius-small: 0.5rem;
+
+  /*  spacing */
+  --space-small: 0.5rem;
+  --space-medium: 1rem;
+  --space-large: 2rem;
+  --space-extra-large: 5rem;
+}
+
+body {
+  font-family: "Poppins", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  margin: auto;
+  width: 99vw;
+  height: 99vh;
+  /* border: 2px solid peachpuff; */
+  background-color: var(--tertiary-color);
+  color: var(--text-color-one);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+* {
+  border: none;
+}

@@ -1,0 +1,77 @@
+.formBranding {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--space-small);
+}
+
+.loginFormContainer {
+  font-size: var(--text-small);
+  background-color: var(--secondary-color);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  gap: var(--space-extra-medium);
+  border-radius: var(--space-medium);
+  padding: var(--space-medium);
+  min-width: 60vw;
+  padding: var(--space-large);
+}
+
+.loginForm {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-medium);
+  border: 2px solid var(--border-color);
+  padding: var(--space-medium);
+  width: 50%;
+  border-radius: var(--border-radius-small);
+}
+
+.formInputContainer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-small);
+}
+
+.signUpLink {
+  color: var(--text-color);
+}
+
+.loginFormButtons {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  gap: var(--space-small);
+  /* background-color: red; */
+}
+
+.googleLoginButton {
+  min-width: 100%;
+  margin-top: var(--space-large);
+}
+
+.googleLoginButton,
+.buttons {
+  height: 2.5rem;
+  border-radius: var(--border-radius-small);
+  padding: var(--space-small);
+}
+
+.buttons {
+  width: 50%;
+}
+
+.input {
+  background-color: var(--tertiary-color);
+  border-radius: var(--border-radius-small);
+  border: none;
+  height: 2.3rem;
+  color: var(--text-color-two);
+}
+
+.input:active {
+  border-color: var(--border-color);
+}
