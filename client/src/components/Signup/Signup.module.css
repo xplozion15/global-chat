@@ -6,7 +6,7 @@
   gap: var(--space-small);
 }
 
-.loginFormContainer {
+.signupFormContainer {
   font-size: var(--text-small);
   background-color: var(--secondary-color);
   display: flex;
@@ -18,10 +18,9 @@
   padding: var(--space-medium);
   min-width: 60vw;
   padding: var(--space-large);
-  border: 2px solid var(--border-color);
 }
 
-.loginForm {
+.signupForm {
   display: flex;
   flex-direction: column;
   gap: var(--space-medium);
@@ -41,12 +40,11 @@
   color: var(--text-color);
 }
 
-.loginFormButtons {
+.signupFormButtons {
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
   gap: var(--space-small);
-  /* background-color: red; */
 }
 
 .googleLoginButton {
@@ -54,15 +52,11 @@
   margin-top: var(--space-large);
 }
 
-.googleLoginButton,
 .buttons {
   height: 2.5rem;
   border-radius: var(--border-radius-small);
   padding: var(--space-small);
-}
-
-.buttons {
-  width: 50%;
+  width: 100%;
 }
 
 .input {

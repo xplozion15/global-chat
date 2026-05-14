@@ -1,17 +1,27 @@
-import styles from "./Login.module.css";
+import styles from "./Signup.module.css";
 import { MessageCircleHeart } from "lucide-react";
 
-const Login = () => {
+const Signup = () => {
   return (
     <>
-      <main className={styles.loginFormContainer}>
-        <form className={styles.loginForm}>
+      <main className={styles.signupFormContainer}>
+        <form className={styles.signupForm}>
           <div className={styles.formBranding}>
             <MessageCircleHeart />
             <p>Global Chat</p>
           </div>
 
-          <h1>Log in</h1>
+          <h1>Sign Up</h1>
+
+          <div className={styles.formInputContainer}>
+            <label htmlFor="nickname">Nickname:</label>
+            <input
+              className={styles.input}
+              type="text"
+              name="nickname"
+              id="nickname"
+            />
+          </div>
 
           <div className={styles.formInputContainer}>
             <label htmlFor="username">Username:</label>
@@ -34,19 +44,15 @@ const Login = () => {
           </div>
 
           <p>
-            Don't have an account?
-            <a className={styles.signUpLink} href="/signup">
-              Sign up
+            Already have an account?
+            <a className={styles.signUpLink} href="/login">
+              Login
             </a>
           </p>
 
-          <div className={styles.loginFormButtons}>
-            <button className={styles.buttons}>Test account</button>
-            <button className={styles.buttons}>Log in</button>
+          <div className={styles.signupFormButtons}>
+            <button className={styles.buttons}>Sign Up</button>
           </div>
-          <button className={styles.googleLoginButton}>
-            Log in with Google
-          </button>
         </form>
 
         <div className={styles.logoContainer}>
@@ -59,4 +65,4 @@ const Login = () => {
   );
 };
 
-export { Login };
+export { Signup };
