@@ -3,5 +3,6 @@
   margin: 0;
   height: 98vh;
   display: grid;
-  grid-template-columns: 1.2fr 1.5fr 6fr;
+  grid-template-columns: 1.3fr 1.5fr 6fr;
+  gap: var(--space-medium);
 }

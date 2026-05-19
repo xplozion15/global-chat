@@ -1,3 +1,58 @@
 .chatNavigationContainer {
-  border: 2px solid powderblue;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--space-medium);
+  background-color: var(--secondary-color);
+}
+
+.chatNavigationTop,
+.chatNavigationBottom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--space-small);
+}
+
+.chatNavigationTop > *,
+.chatNavigationBottom > * {
+  position: relative;
+  display: flex;
+  width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  gap: var(--space-small);
+  text-decoration: none;
+  transition: background-color 500ms;
+  padding: var(--space-small);
+}
+
+.chatNavigationTop > *:hover,
+.chatNavigationBottom > *:hover {
+  background-color: var(--tertiary-color);
+}
+
+.profileElement {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--tertiary-color);
+  padding: var(--space-small);
+  width: 100%;
+  gap: var(--space-medium);
+  max-height: 2.5rem;
+}
+
+.chatNavigationBottom {
+  gap: var(--space-medium);
+}
+
+.sidebarUserInfo {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-small);
 }

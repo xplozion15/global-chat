@@ -1,0 +1,14 @@
+.notification {
+  position: absolute;
+  border-radius: 45%;
+  width: 0.5rem;
+  height: 0.5rem;
+  background-color: red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  right: 4%;
+  font-weight: 400;
+  padding: var(--space-small);
+  font-size: 0.8rem;
+}
