@@ -1,4 +1,4 @@
-.conversationListContainer {
+.conversationViewContainer {
   padding: var(--space-small);
   background-color: var(--secondary-color);
 }

@@ -1,15 +1,14 @@
 import { ChatNavigation } from "../ChatNavigation/ChatNavigation";
-import { ConversationList } from "../ConversationList/ConversationList";
-import { ConversationView } from "../ConversationView/ConversationView";
+
 import styles from "./Homepage.module.css";
+import { Outlet } from "react-router";
 
 const Homepage = () => {
   return (
     <>
       <main className={styles.homepage}>
         <ChatNavigation />
-        <ConversationList />
-        <ConversationView />
+        <Outlet />
       </main>
     </>
   );

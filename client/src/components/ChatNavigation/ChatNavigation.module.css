@@ -18,6 +18,7 @@
 .chatNavigationTop > *,
 .chatNavigationBottom > * {
   position: relative;
+
   display: flex;
   width: 100%;
   justify-content: flex-start;
@@ -55,4 +56,13 @@
   justify-content: center;
   align-items: center;
   gap: var(--space-small);
+}
+
+.userImage {
+  border-radius: 50%;
+  width: 2.2rem;
+  height: 2.2rem;
+}
+.logo {
+  background-color: var(--tertiary-color);
 }
