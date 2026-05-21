@@ -49,3 +49,17 @@ body {
 a {
   color: white;
 }
+
+/* Firefox */
+* {
+  scrollbar-color: silver transparent;
+}
+
+/* Chrome, Edge, Safari */
+*::-webkit-scrollbar-thumb {
+  background-color: silver;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}

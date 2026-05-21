@@ -1,0 +1,64 @@
+.friendsContainer {
+  padding: var(--space-small);
+  background-color: var(--secondary-color);
+  overflow-y: auto;
+  /* border: 2px solid peachpuff; */
+  /* width: 100%; */
+}
+
+.friendsToggler {
+  width: 90%;
+  height: 2rem;
+  background-color: var(--tertiary-color);
+  display: flex;
+  justify-content: center;
+  gap: var(--space-medium);
+  padding: var(--space-small);
+  /* border: 2px solid red; */
+}
+
+.friendsToggler > * {
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  white-space: nowrap;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 0.7rem;
+}
+
+.friend {
+  width: 95%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-small);
+  white-space: nowrap;
+  gap: var(--space-small);
+  font-size: 0.7rem;
+  transition: background-color 500ms;
+  white-space: wrap;
+}
+
+.friend:hover {
+  background-color: var(--tertiary-color);
+}
+
+.friendNamePfp {
+  display: flex;
+  align-items: center;
+  gap: var(--space-small);
+}
+
+.friendPfp {
+  width: 2rem;
+  height: 2rem;
+}
+
+.iconContainer {
+  display: flex;
+  gap: var(--space-medium);
+}

@@ -1,5 +1,24 @@
 .conversationListContainer {
   padding: var(--space-small);
   background-color: var(--secondary-color);
-  overflow-y: scroll;
+  overflow-y: auto;
+}
+
+.chatroomsListContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--space-extra-large);
+}
+
+.chatroomsListContainer > * {
+  text-decoration: none;
+  transition: background-color 300ms;
+  padding: var(--space-small);
+  font-weight: 400;
+  background-color: var(--tertiary-color);
+}
+
+.chatroomsListContainer > *:hover {
+  background-color: var(--primary-color);
 }

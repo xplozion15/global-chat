@@ -1,10 +1,10 @@
-import { FriendsConversationList } from "../FriendsConversationList/FriendsConversationList";
+import { FriendsList } from "../FriendsList/FriendsList";
 import { FriendsConversationView } from "../FriendsConversationView/FriendsConversationView";
 
 const Friends = () => {
   return (
     <>
-      <FriendsConversationList />
+      <FriendsList />
       <FriendsConversationView />
     </>
   );

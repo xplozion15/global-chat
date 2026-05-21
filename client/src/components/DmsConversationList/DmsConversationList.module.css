@@ -1,0 +1,24 @@
+.DmsConversationListContainer {
+  background-color: var(--secondary-color);
+  overflow-y: auto;
+  padding: var(--space-small);
+}
+
+.dm {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: var(--space-medium);
+  text-decoration: none;
+  transition: background-color 500ms;
+}
+
+.dm:hover {
+  background-color: var(--tertiary-color);
+}
+
+.avatarImage {
+  width: 2rem;
+  height: 2rem;
+}

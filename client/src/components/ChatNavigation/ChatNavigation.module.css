@@ -65,4 +65,5 @@
 }
 .logo {
   background-color: var(--tertiary-color);
+  white-space: nowrap;
 }

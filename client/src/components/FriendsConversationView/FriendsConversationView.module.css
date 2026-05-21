@@ -1,0 +1,4 @@
+.friendConversationContainer {
+  padding: var(--space-small);
+  background-color: var(--secondary-color);
+}

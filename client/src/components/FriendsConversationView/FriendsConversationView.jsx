@@ -1,7 +1,11 @@
+import styles from "./FriendsConversationView.module.css";
+
 const FriendsConversationView = () => {
   return (
     <>
-      <p>friends convo view</p>
+      <div className={styles.friendConversationContainer}>
+        <p>friends convo view</p>
+      </div>
     </>
   );
 };
