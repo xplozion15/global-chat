@@ -31,7 +31,7 @@
 
 .chatNavigationTop > *:hover,
 .chatNavigationBottom > *:hover {
-  background-color: var(--tertiary-color);
+  background-color: var(--hover-color-one);;
 }
 
 .profileElement {
@@ -64,6 +64,6 @@
   height: 2.2rem;
 }
 .logo {
-  background-color: var(--tertiary-color);
+  background-color: var(--hover-color-one);
   white-space: nowrap;
 }

@@ -1,0 +1,11 @@
+
+.typingIndicator{
+  opacity: 0.7;
+  font-weight: 200;
+  padding: var(--space-small);
+  /* border: 2px solid palegoldenrod; */
+  font-size: 0.8rem;
+  width: max-content;
+  margin-left: var(--space-small);
+  padding: 0;
+}

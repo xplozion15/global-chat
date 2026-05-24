@@ -1,0 +1,47 @@
+.messageInput {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--primary-color);
+  padding: var(--space-medium);
+  gap: var(--space-small);
+}
+
+.emojiSendButtonContainer {
+  display: flex;
+  align-items: center;
+  gap: var(--space-small);
+}
+
+.messageInputField {
+  width: 80%;
+  height: 2.5rem;
+  background-color: var(--tertiary-color);
+  color: white;
+}
+
+.sendButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-small);
+  width: 4rem;
+  cursor: pointer;
+}
+
+.emojiPicker {
+  cursor: pointer;
+  color: white;
+  background: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.emojiPickerElementWrapper {
+  position: absolute;
+  bottom: 85%;
+  right: 70%;
+}

@@ -1,9 +1,7 @@
 .friendsContainer {
   padding: var(--space-small);
   background-color: var(--secondary-color);
-  overflow-y: auto;
-  /* border: 2px solid peachpuff; */
-  /* width: 100%; */
+  overflow-y: scroll;
 }
 
 .friendsToggler {
@@ -38,7 +36,7 @@
   padding: var(--space-small);
   white-space: nowrap;
   gap: var(--space-small);
-  font-size: 0.7rem;
+  font-size: 0.8rem;
   transition: background-color 500ms;
   white-space: wrap;
 }

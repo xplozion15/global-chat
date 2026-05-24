@@ -12,11 +12,12 @@
   /*  colours */
   --primary-color: #2c2d32;
   --secondary-color: #323339;
-  --tertiary-color: #212121;
+  --tertiary-color: #3f3f46;
   --text-color-one: #f3f3f3;
   --text-color-two: #919191;
-  --hover-color-one: #3f3f46;
+  --hover-color-one: #212121;
   --hover-color-two: #e9e3e3;
+
   --border-color: #333333;
   --border-radius-small: 0.5rem;
 
