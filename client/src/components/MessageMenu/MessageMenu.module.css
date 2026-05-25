@@ -1,0 +1,25 @@
+.messageMenu {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--tertiary-color);
+  z-index: 9999;
+  height: 3rem;
+  gap: var(--space-medium);
+  position: absolute;
+  right: 6%;
+  top: 2%;
+}
+
+.messageOptions,
+.messageReactions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-small);
+}
+.messageReactions {
+  border-right: 1px solid gray;
+  border-radius: 0;
+  height: 1rem;
+}

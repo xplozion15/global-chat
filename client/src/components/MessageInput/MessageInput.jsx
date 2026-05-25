@@ -10,7 +10,11 @@ const MessageInput = () => {
   return (
     <>
       <div className={styles.messageInput}>
-        <Plus className={styles.plusIcon} />
+        <input type="file" name="upload-file" id="upload-file" hidden />
+        <label htmlFor="upload-file">
+          <Plus className={styles.plusIcon} />
+        </label>
+
         <label htmlFor="messageInputField" hidden></label>
         <input type="text" className={styles.messageInputField} />
         <div className={styles.emojiSendButtonContainer}>
