@@ -29,7 +29,8 @@
 }
 
 body {
-  font-family: "Poppins", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-family:
+    "Syne", "Poppins", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   margin: auto;
   width: 99vw;
   height: 99vh;

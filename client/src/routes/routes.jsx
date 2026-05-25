@@ -12,6 +12,10 @@ const routes = createBrowserRouter([
     element: <App />,
     children: [
       {
+        index: true,
+        element: <Chats />,
+      },
+      {
         path: "/chats",
         element: <Chats />,
       },

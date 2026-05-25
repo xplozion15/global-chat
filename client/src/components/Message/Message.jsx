@@ -1,7 +1,6 @@
 import styles from "./Message.module.css";
 import { Ellipsis } from "lucide-react";
 
-
 const Message = () => {
   return (
     <>

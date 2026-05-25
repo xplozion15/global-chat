@@ -1,4 +1,11 @@
 .friendConversationContainer {
   padding: var(--space-small);
   background-color: var(--secondary-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nothingText {
+  font-size: var(--text-large);
 }

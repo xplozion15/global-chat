@@ -21,11 +21,9 @@ const ChatConversationView = () => {
           <Message />
           <Message />
           <Message />
-
-          
         </div>
-        <TypingIndicator/>
-        <MessageInput/>
+        <TypingIndicator typingInfo={"Xajx, viena and 2 others are typing"} />
+        <MessageInput />
       </div>
     </>
   );

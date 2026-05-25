@@ -4,7 +4,7 @@ const FriendsConversationView = () => {
   return (
     <>
       <div className={styles.friendConversationContainer}>
-        <p>friends convo view</p>
+        <p className={styles.nothingText}>Theres nothing here</p>
       </div>
     </>
   );

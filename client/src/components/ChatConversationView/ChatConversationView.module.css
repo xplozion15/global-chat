@@ -9,13 +9,11 @@
 .chatName {
   padding-left: var(--space-small);
   padding-right: var(--space-small);
-  background-color: var(--tertiary-color);
+  background-color: var(--primary-color);
   width: fit-content;
-
 }
 
 .messages {
   overflow-y: auto;
   height: 70vh;
 }
-

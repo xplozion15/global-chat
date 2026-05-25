@@ -1,0 +1,32 @@
+.dmsViewContainer {
+  background-color: var(--secondary-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--space-small);
+}
+
+.chatName {
+  background-color: var(--primary-color);
+  width: fit-content;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  margin: var(--space-small);
+  padding: var(--space-small);
+  height: 3rem;
+  gap: var(--space-small);
+  cursor: pointer;
+}
+
+.messages {
+  overflow-y: auto;
+  height: 70vh;
+}
+
+.dmPfp {
+  border-radius: 45%;
+  width: 2rem;
+  height: 2rem;
+}

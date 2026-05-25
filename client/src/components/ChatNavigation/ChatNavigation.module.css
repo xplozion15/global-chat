@@ -31,7 +31,7 @@
 
 .chatNavigationTop > *:hover,
 .chatNavigationBottom > *:hover {
-  background-color: var(--hover-color-one);;
+  background-color: var(--hover-color-one);
 }
 
 .profileElement {
