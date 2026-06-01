@@ -7,8 +7,12 @@ import { Send } from "lucide-react";
 import { NotificationBadge } from "../NotificationBadge/NotificationBadge";
 import { MessageCircleHeart } from "lucide-react";
 import { Settings } from "lucide-react";
+import { NotificationPanel } from "../NotificationPanel/NotificationPanel";
+import { useState } from "react";
 
 const ChatNavigation = () => {
+  const [showNotifications, setShowNotifications] = useState(false);
+
   return (
     <>
       <div className={styles.chatNavigationContainer}>
@@ -33,11 +37,17 @@ const ChatNavigation = () => {
         </div>
 
         <div className={styles.chatNavigationBottom}>
-          <Link>
+          <button
+            className={styles.notificationButton}
+            onClick={() => {
+              setShowNotifications((prevState) => !prevState);
+            }}
+          >
             <BellDot />
             Notifications
             <NotificationBadge />
-          </Link>
+            {showNotifications && <NotificationPanel />}
+          </button>
           <div className={styles.profileElement}>
             <div className={styles.sidebarUserInfo}>
               <img

@@ -67,3 +67,12 @@
   background-color: var(--hover-color-one);
   white-space: nowrap;
 }
+
+
+.notificationButton {
+  background-color: var(--tertiary-color);
+  color: white;
+  width: 100%;
+  position: relative;
+  cursor: pointer;
+}
