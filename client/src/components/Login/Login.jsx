@@ -48,12 +48,6 @@ const Login = () => {
             Log in with Google
           </button>
         </form>
-
-        <div className={styles.logoContainer}>
-          <div>
-            <MessageCircleHeart size={250} />
-          </div>
-        </div>
       </main>
     </>
   );

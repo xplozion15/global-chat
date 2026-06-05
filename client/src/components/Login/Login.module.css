@@ -16,7 +16,7 @@
   gap: var(--space-extra-medium);
   border-radius: var(--space-medium);
   padding: var(--space-medium);
-  min-width: 60vw;
+  min-width: 30vw;
   padding: var(--space-large);
   border: 2px solid var(--border-color);
 }
@@ -27,7 +27,7 @@
   gap: var(--space-medium);
   border: 2px solid var(--border-color);
   padding: var(--space-medium);
-  width: 50%;
+  width: 100%;
   border-radius: var(--border-radius-small);
 }
 
