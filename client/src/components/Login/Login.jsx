@@ -1,7 +1,31 @@
 import styles from "./Login.module.css";
 import { MessageCircleHeart } from "lucide-react";
+import { useState } from "react";
+import { useNavigate } from "react-router";
+import { loginUser } from "../../services/authServices";
 
 const Login = () => {
+  const navigate = useNavigate();
+
+  const [loginFormData, setLoginFormData] = useState({
+    username: "",
+    password: "",
+  });
+
+  const loginHandler = async (e) => {
+    e.preventDefault();
+    try {
+      await loginUser(loginFormData);
+      navigate("/");
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const onChangeHandler = (e) => {
+    setLoginFormData({ ...loginFormData, [e.target.name]: e.target.value });
+  };
+
   return (
     <>
       <main className={styles.loginFormContainer}>
@@ -20,6 +44,7 @@ const Login = () => {
               type="text"
               name="username"
               id="username"
+              onChange={onChangeHandler}
             />
           </div>
 
@@ -30,6 +55,7 @@ const Login = () => {
               type="password"
               name="password"
               id="password"
+              onChange={onChangeHandler}
             />
           </div>
 
@@ -42,7 +68,9 @@ const Login = () => {
 
           <div className={styles.loginFormButtons}>
             <button className={styles.buttons}>Test account</button>
-            <button className={styles.buttons}>Log in</button>
+            <button className={styles.buttons} onClick={loginHandler}>
+              Log in
+            </button>
           </div>
           <button className={styles.googleLoginButton}>
             Log in with Google

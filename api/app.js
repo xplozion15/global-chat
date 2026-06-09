@@ -1,3 +1,4 @@
+//imports
 import express from "express";
 const app = express();
 import "dotenv/config";
@@ -10,30 +11,33 @@ import passport from "passport";
 import cors from "cors";
 import { authRouter } from "./routes/auth.routes.js";
 
-const port = process.env.PORT;
-
-// DATABASE_URL defined in env file included in prisma.config.js; see Prisma docs
+//credentials and configs
 const connectionString = `${process.env.DATABASE_URL}`;
 const adapter = new PrismaPg({ connectionString });
 const prisma = new PrismaClient({ adapter });
+const port = process.env.PORT;
 
+//for cors policy
 app.use(
   cors({
     origin: process.env.FRONTENDURL,
+    credentials: true,
   }),
 );
 
+//to add form data
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+//express esssion
 app.use(
   expressSession({
     cookie: {
       maxAge: 7 * 24 * 60 * 60 * 1000, // ms
     },
     secret: process.env.SECRET,
-    resave: true,
-    saveUninitialized: true,
+    resave: false,
+    saveUninitialized: false,
     store: new PrismaSessionStore(prisma, {
       checkPeriod: 2 * 60 * 1000, //ms
       dbRecordIdIsSessionId: true,
@@ -42,11 +46,14 @@ app.use(
   }),
 );
 
+//initialize passport and session
 app.use(passport.initialize());
 app.use(passport.session());
 
+//routers
 app.use("/auth", authRouter);
 
+//listener
 app.listen(port, () => {
   console.log(`Running on port ${port}`);
 });

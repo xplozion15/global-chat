@@ -66,8 +66,8 @@
 .logo {
   background-color: var(--hover-color-one);
   white-space: nowrap;
+  display: flex;
 }
-
 
 .notificationButton {
   background-color: var(--tertiary-color);

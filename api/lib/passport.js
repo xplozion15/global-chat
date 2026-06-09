@@ -11,9 +11,7 @@ passport.use(
           username: username,
         },
       });
-
       const user = fetchUser;
-
       if (!user) {
         return done(null, false, { message: "Incorrect username" });
       }

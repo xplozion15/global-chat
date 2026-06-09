@@ -2,6 +2,7 @@
   padding: var(--space-small);
   background-color: var(--secondary-color);
   overflow-y: auto;
+  padding: var(--space-medium);
 }
 
 .chatroomsListContainer {
