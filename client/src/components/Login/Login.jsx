@@ -3,6 +3,7 @@ import { MessageCircleHeart } from "lucide-react";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import { loginUser } from "../../services/authServices";
+import { API_BASE_URL } from "../../config/api";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -20,6 +21,11 @@ const Login = () => {
     } catch (error) {
       console.error(error);
     }
+  };
+
+  const googleLoginHandler = (e) => {
+    e.preventDefault();
+    window.location.href = `${API_BASE_URL}/auth/google`;
   };
 
   const onChangeHandler = (e) => {
@@ -72,7 +78,10 @@ const Login = () => {
               Log in
             </button>
           </div>
-          <button className={styles.googleLoginButton}>
+          <button
+            className={styles.googleLoginButton}
+            onClick={googleLoginHandler}
+          >
             Log in with Google
           </button>
         </form>

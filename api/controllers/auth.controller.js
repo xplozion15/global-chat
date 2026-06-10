@@ -62,4 +62,5 @@ const loginUser = (req, res, next) => {
   })(req, res, next);
 };
 
-export { registerUser, loginUser };
+
+export { registerUser, loginUser};
