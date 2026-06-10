@@ -10,6 +10,7 @@ import "./lib/passport.js";
 import passport from "passport";
 import cors from "cors";
 import { authRouter } from "./routes/auth.routes.js";
+import { chatroomRouter } from "./routes/chatroom.routes.js";
 
 //credentials and configs
 const connectionString = `${process.env.DATABASE_URL}`;
@@ -52,6 +53,7 @@ app.use(passport.session());
 
 //routers
 app.use("/auth", authRouter);
+app.use("/chatrooms", chatroomRouter);
 
 //listener
 app.listen(port, () => {

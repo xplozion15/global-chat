@@ -22,3 +22,15 @@ model Session {
   data      String
   expiresAt DateTime
 }
+
+model Chatroom {
+  id       Int       @id @default(autoincrement())
+  name     String    @unique
+  messages Message[]
+}
+
+model Message {
+  id         String   @id @default(uuid())
+  chatroom   Chatroom @relation(fields: [chatroomId], references: [id])
+  chatroomId Int
+}

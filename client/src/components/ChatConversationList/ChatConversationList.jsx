@@ -1,85 +1,30 @@
 import styles from "./ChatConversationList.module.css";
 import { Link } from "react-router";
+import { fetchChatrooms } from "../../services/chatroomServices";
+import { useEffect, useState } from "react";
 
 const ChatConversationList = () => {
-  const chatRooms = {
-    success: true,
-    data: [
-      {
-        id: "room_1",
-        name: "General Chat",
-      },
-      {
-        id: "room_2",
-        name: "React Study Group",
-      },
-      {
-        id: "room_3",
-        name: "Gaming Squad",
-      },
-      {
-        id: "room_4",
-        name: "Music Lounge",
-      },
-      {
-        id: "room_5",
-        name: "Anime Fans",
-      },
-      {
-        id: "room_6",
-        name: "Movie Club",
-      },
-      {
-        id: "room_7",
-        name: "Coding Help",
-      },
-      {
-        id: "room_8",
-        name: "Late Night Talks",
-      },
-      {
-        id: "room_1",
-        name: "General Chat",
-      },
-      {
-        id: "room_2",
-        name: "React Study Group",
-      },
-      {
-        id: "room_3",
-        name: "Gaming Squad",
-      },
-      {
-        id: "room_4",
-        name: "Music Lounge",
-      },
-      {
-        id: "room_5",
-        name: "Anime Fans",
-      },
-      {
-        id: "room_6",
-        name: "Movie Club",
-      },
-      {
-        id: "room_7",
-        name: "Coding Help",
-      },
-      {
-        id: "room_8",
-        name: "Late Night Talks",
-      },
-    ],
-  };
+  const [chatrooms, setChatrooms] = useState([]);
 
+  useEffect(() => {
+    const loadChatrooms = async () => {
+      try {
+        const chatrooms = await fetchChatrooms();
+        setChatrooms(chatrooms);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    loadChatrooms();
+  }, []);
   return (
     <div className={styles.conversationListContainer}>
       <h2>Chatrooms</h2>
       <div className={styles.chatroomsListContainer}>
-        {chatRooms.data.map((chat) => {
+        {chatrooms.map((chat) => {
           return (
             <>
-              <Link># {chat.name}</Link>
+              <Link key={chat.id}>#{chat.name}</Link>
             </>
           );
         })}
