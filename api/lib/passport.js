@@ -67,6 +67,7 @@ passport.use(
 );
 
 passport.serializeUser((user, done) => {
+   console.log("SERIALIZE", user.id);
   done(null, user.id);
 });
 
@@ -77,9 +78,9 @@ passport.deserializeUser(async (id, done) => {
         id: id,
       },
     });
-
+    
     const user = fetchUser;
-
+    console.log("FOUND USER", user);
     if (!user) {
       return done(null, false);
     }

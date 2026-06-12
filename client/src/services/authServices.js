@@ -47,4 +47,16 @@ const loginUser = async (userFormData) => {
   return result;
 };
 
-export { registerUser, loginUser };
+const getMe = async () => {
+  const response = await fetch(`${API_BASE_URL}/auth/getMe`, {
+    credentials: "include",
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to get current user details");
+  }
+  const result = await response.json();
+  return result.user;
+};
+
+export { registerUser, loginUser, getMe };

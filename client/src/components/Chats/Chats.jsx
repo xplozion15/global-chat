@@ -1,11 +1,13 @@
+import { Outlet } from "react-router";
 import { ChatConversationList } from "../ChatConversationList/ChatConversationList";
-import { ChatConversationView } from "../ChatConversationView/ChatConversationView";
+import { useParams } from "react-router";
 
 const Chats = () => {
+  const { chatId } = useParams();
   return (
     <>
       <ChatConversationList />
-      <ChatConversationView />
+      <Outlet context={{chatId}} />
     </>
   );
 };

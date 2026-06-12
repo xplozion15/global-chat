@@ -5,6 +5,7 @@ import { Signup } from "../components/Signup/Signup";
 import { Chats } from "../components/Chats/Chats";
 import { Dms } from "../components/Dms/Dms";
 import { Friends } from "../components/Friends/Friends";
+import { ChatConversationView } from "../components/ChatConversationView/ChatConversationView";
 
 const routes = createBrowserRouter([
   {
@@ -18,6 +19,12 @@ const routes = createBrowserRouter([
       {
         path: "/chats",
         element: <Chats />,
+        children: [
+          {
+            path: ":chatId",
+            element: <ChatConversationView />,
+          },
+        ],
       },
       {
         path: "/dms",

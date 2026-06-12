@@ -9,9 +9,11 @@ import { MessageCircleHeart } from "lucide-react";
 import { Settings } from "lucide-react";
 import { NotificationPanel } from "../NotificationPanel/NotificationPanel";
 import { useState } from "react";
+import { MyProfile } from "../MyProfile/MyProfile";
 
 const ChatNavigation = () => {
   const [showNotifications, setShowNotifications] = useState(false);
+  const [showMyProfile, setShowMyProfile] = useState(false);
 
   return (
     <>
@@ -48,7 +50,10 @@ const ChatNavigation = () => {
             <NotificationBadge />
             {showNotifications && <NotificationPanel />}
           </button>
-          <div className={styles.profileElement}>
+          <div
+            className={styles.profileElement}
+            onClick={() => setShowMyProfile((isOpen) => !isOpen)}
+          >
             <div className={styles.sidebarUserInfo}>
               <img
                 src="https://res.cloudinary.com/dkidfx99m/image/upload/v1719927101/cui0bm8jfffqmoeh7rya.jpg"
@@ -56,6 +61,7 @@ const ChatNavigation = () => {
                 className={styles.userImage}
               />
               <p>Xplozion</p>
+              {showMyProfile && <MyProfile />}
             </div>
             <Settings />
           </div>

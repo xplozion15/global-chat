@@ -1,0 +1,20 @@
+.myProfile {
+  border: 2px solid black;
+  width: 15rem;
+  position: absolute;
+  z-index: 999;
+  bottom: 140%;
+  left: 1%;
+  background-color: var(--secondary-color);
+}
+
+.profilePicture {
+  width: 2rem;
+  height: 2rem;
+}
+
+.banner {
+  width: 100%;
+  height: 5rem;
+  background-color: rgb(35, 33, 199);
+}

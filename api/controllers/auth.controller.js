@@ -29,8 +29,8 @@ const registerUser = async (req, res) => {
 };
 
 const loginUser = (req, res, next) => {
-  passport.authenticate('local', (err, user, info) => {
-    console.log(info)
+  passport.authenticate("local", (err, user, info) => {
+    console.log(info);
     if (err) {
       return res.status(500).json({
         message: err.message,
@@ -62,5 +62,36 @@ const loginUser = (req, res, next) => {
   })(req, res, next);
 };
 
+const getMe = async (req, res) => {
+  console.log("req.user:", req.user);
+  console.log("req.session:", req.session);
+  const userId = req.user.id;
 
-export { registerUser, loginUser};
+  try {
+    const user = await prisma.user.findUnique({
+      where: {
+        id: userId,
+      },
+      select: {
+        id: true,
+        username: true,
+        email: true,
+        nickname: true,
+        bio: true,
+        bannerColour: true,
+        status: true,
+      },
+    });
+    return res.status(200).json({
+      message: "Profile fetched successfully",
+      user: user,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Failed to fetch the profile details",
+    });
+    console.error(error);
+  }
+};
+
+export { registerUser, loginUser, getMe };

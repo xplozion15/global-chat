@@ -24,7 +24,9 @@ const ChatConversationList = () => {
         {chatrooms.map((chat) => {
           return (
             <>
-              <Link key={chat.id}>#{chat.name}</Link>
+              <Link key={chat.id} to={`/chats/${chat.id}`}>
+                #{chat.name}
+              </Link>
             </>
           );
         })}

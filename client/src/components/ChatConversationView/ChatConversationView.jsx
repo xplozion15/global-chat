@@ -2,12 +2,15 @@ import styles from "./ChatConversationView.module.css";
 import { Message } from "../Message/Message";
 import { MessageInput } from "../MessageInput/MessageInput";
 import { TypingIndicator } from "../TypingIndiciator/TypingIndicator";
+import { useOutletContext } from "react-router";
 
 const ChatConversationView = () => {
+  const { chatId } = useOutletContext();
+  
   return (
     <>
       <div className={styles.conversationViewContainer}>
-        <h2 className={styles.chatName}># Technology</h2>
+        <h2 className={styles.chatName}># Technology {chatId}</h2>
         <div className={styles.messages}>
           <Message />
           <Message />

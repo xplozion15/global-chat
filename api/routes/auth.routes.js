@@ -1,6 +1,10 @@
 import express from "express";
 const authRouter = express.Router();
-import { loginUser, registerUser } from "../controllers/auth.controller.js";
+import {
+  getMe,
+  loginUser,
+  registerUser,
+} from "../controllers/auth.controller.js";
 import passport from "passport";
 import "dotenv/config";
 
@@ -16,6 +20,7 @@ authRouter.get(
     res.redirect(process.env.FRONTENDURL);
   },
 );
+authRouter.get("/getMe", getMe);
 authRouter.post("/signup", registerUser);
 authRouter.post("/login", loginUser);
 

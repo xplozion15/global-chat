@@ -7,13 +7,21 @@ datasource db {
   provider = "postgresql"
 }
 
+enum UserStatus {
+  ONLINE
+  IDLE
+}
+
 model User {
-  id       String  @id @default(uuid())
-  nickname String
-  username String  @unique
-  password String?
-  email    String  @unique
-  googleId String? @unique
+  id           String     @id @default(uuid())
+  nickname     String
+  username     String     @unique
+  password     String?
+  email        String     @unique
+  googleId     String?    @unique
+  bio          String     @default("hi im new here")
+  status       UserStatus @default(IDLE)
+  bannerColour String     @default("#5865F2")
 }
 
 model Session {
