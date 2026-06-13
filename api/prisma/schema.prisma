@@ -22,6 +22,7 @@ model User {
   bio          String     @default("hi im new here")
   status       UserStatus @default(IDLE)
   bannerColour String     @default("#5865F2")
+  reactions    Reaction[]
 }
 
 model Session {
@@ -38,7 +39,29 @@ model Chatroom {
 }
 
 model Message {
-  id         String   @id @default(uuid())
-  chatroom   Chatroom @relation(fields: [chatroomId], references: [id])
+  id         String     @id @default(uuid())
+  chatroom   Chatroom   @relation(fields: [chatroomId], references: [id])
   chatroomId Int
+  replyId    Int?
+  reaction   Reaction[]
+  createdAt  DateTime   @default(now())
+}
+
+enum ReactionType {
+  LOVE
+  LAUGH
+  WOW
+  CRY
+  OK
+}
+
+model Reaction {
+  id        Int          @id @default(autoincrement())
+  sender    User         @relation(fields: [senderId], references: [id])
+  senderId  String
+  type      ReactionType
+  message   Message      @relation(fields: [messageId], references: [id])
+  messageId String
+
+  @@unique([senderId, messageId, type])
 }
