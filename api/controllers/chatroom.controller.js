@@ -24,7 +24,7 @@ const fetchChatroomMessages = async (req, res) => {
         chatroomId: chatroomId,
       },
     });
-    console.log(chatroomMessages)
+    console.log(chatroomMessages);
     res.status(200).json({
       message: "Messages fetched successfully",
       chatroomMessages: chatroomMessages,
@@ -37,4 +37,25 @@ const fetchChatroomMessages = async (req, res) => {
   }
 };
 
-export { fetchChatrooms, fetchChatroomMessages };
+const fetchChatroomName = async (req, res) => {
+  const chatroomId = Number(req.params.chatroomId);
+  try {
+    const chatroom = await prisma.chatroom.findUnique({
+      where: {
+        id: chatroomId,
+      },
+    });
+    const chatroomName = chatroom.name;
+    return res.status(200).json({
+      message: "chatroom name fetched successfully",
+      chatroomName: chatroomName,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      message: "failed to fetch the chatroom name",
+    });
+  }
+};
+
+export { fetchChatrooms, fetchChatroomMessages, fetchChatroomName };

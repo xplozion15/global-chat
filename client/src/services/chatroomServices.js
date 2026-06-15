@@ -25,4 +25,15 @@ const fetchMessagesInChatroom = async (chatroomId) => {
   return chatRoomMessages;
 };
 
-export { fetchChatrooms, fetchMessagesInChatroom };
+const fetchChatroomName = async (chatroomId) => {
+  const response = await fetch(`${API_BASE_URL}/chatrooms/${chatroomId}`);
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch the messages");
+  }
+  const chatRoomName = await response.json();
+
+  return chatRoomName;
+};
+
+export { fetchChatrooms, fetchMessagesInChatroom, fetchChatroomName };
