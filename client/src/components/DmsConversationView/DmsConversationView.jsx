@@ -1,7 +1,7 @@
 import styles from "./DmsConversationView.module.css";
 import { Message } from "../Message/Message";
 import { MessageInput } from "../MessageInput/MessageInput";
-import { TypingIndicator } from "../TypingIndiciator/TypingIndicator";
+import { TypingIndicator } from "../TypingIndicator/TypingIndicator";
 
 const DmsConversationView = () => {
   return (

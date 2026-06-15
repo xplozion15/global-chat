@@ -21,7 +21,7 @@ const routes = createBrowserRouter([
         element: <Chats />,
         children: [
           {
-            path: ":chatId",
+            path: ":chatroomId",
             element: <ChatConversationView />,
           },
         ],

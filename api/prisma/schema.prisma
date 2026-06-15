@@ -39,12 +39,13 @@ model Chatroom {
 }
 
 model Message {
-  id         String     @id @default(uuid())
-  chatroom   Chatroom   @relation(fields: [chatroomId], references: [id])
-  chatroomId Int
-  replyId    Int?
-  reaction   Reaction[]
-  createdAt  DateTime   @default(now())
+  id          String     @id @default(uuid())
+  chatroom    Chatroom   @relation(fields: [chatroomId], references: [id])
+  chatroomId  Int
+  replyId     Int?
+  reaction    Reaction[]
+  createdAt   DateTime   @default(now())
+  messageBody String
 }
 
 enum ReactionType {

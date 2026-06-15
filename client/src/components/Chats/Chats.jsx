@@ -3,11 +3,11 @@ import { ChatConversationList } from "../ChatConversationList/ChatConversationLi
 import { useParams } from "react-router";
 
 const Chats = () => {
-  const { chatId } = useParams();
+  const { chatroomId } = useParams();
   return (
     <>
       <ChatConversationList />
-      <Outlet context={{chatId}} />
+      <Outlet context={{chatroomId}} />
     </>
   );
 };

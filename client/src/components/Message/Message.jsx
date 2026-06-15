@@ -3,9 +3,8 @@ import { Ellipsis } from "lucide-react";
 import { MessageMenu } from "../MessageMenu/MessageMenu";
 import { useState } from "react";
 
-const Message = () => {
+const Message = ({ message }) => {
   const [showMessageMenu, setShowMessageMenu] = useState(false);
-
   return (
     <>
       <div className={styles.message}>
@@ -16,12 +15,12 @@ const Message = () => {
         />
         <div>
           <p className={styles.userName}>Xplozion</p>
-          <p className={styles.parentMessage}>This is the parent message</p>
-          <p className={styles.replyMessage}>this is a sample reply</p>
-          <div className={styles.messageReactionContainer}>
+          <p className={styles.parentMessage}>{message.messageBody}</p>
+          {/* <p className={styles.replyMessage}>this is a sample reply</p> */}
+          {/* <div className={styles.messageReactionContainer}>
             <div className={styles.messageReaction}>😭 1</div>
             <div className={styles.messageReaction}>😂 3</div>
-          </div>
+          </div> */}
         </div>
         <button
           className={styles.dotsIcon}

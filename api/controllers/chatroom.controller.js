@@ -16,4 +16,25 @@ const fetchChatrooms = async (req, res) => {
   }
 };
 
-export { fetchChatrooms };
+const fetchChatroomMessages = async (req, res) => {
+  try {
+    const chatroomId = Number(req.params.chatroomId);
+    const chatroomMessages = await prisma.message.findMany({
+      where: {
+        chatroomId: chatroomId,
+      },
+    });
+    console.log(chatroomMessages)
+    res.status(200).json({
+      message: "Messages fetched successfully",
+      chatroomMessages: chatroomMessages,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      message: "Something wrong happened",
+    });
+  }
+};
+
+export { fetchChatrooms, fetchChatroomMessages };
