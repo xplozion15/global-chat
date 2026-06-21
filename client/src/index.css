@@ -16,7 +16,7 @@
   --text-color-one: #f3f3f3;
   --text-color-two: #919191;
   --hover-color-one: #212121;
-  --hover-color-two: #e9e3e3;
+  --hover-color-two: #aaa2a2;
   --border-color: #333333;
   --border-radius-small: 0.5rem;
 
@@ -28,8 +28,7 @@
 }
 
 body {
-  font-family:
-    "Syne", "Poppins", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Poppins", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   margin: auto;
   width: 99vw;
   height: 99vh;

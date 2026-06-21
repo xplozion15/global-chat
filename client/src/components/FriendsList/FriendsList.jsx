@@ -5,6 +5,7 @@ import { MessageCircle } from "lucide-react";
 import { EllipsisVertical } from "lucide-react";
 import { CircleCheck } from "lucide-react";
 import { Ban } from "lucide-react";
+import { FriendRequest } from "../FriendRequest/FriendRequest";
 
 const FriendsList = () => {
   const [friendsTabState, setFriendsTabState] = useState("friends");
@@ -140,77 +141,81 @@ const FriendsList = () => {
       <div className={styles.friendsContainer}>
         <h2>Friends</h2>
 
-        <div className={styles.friendsToggler}>
-          <button
-            onClick={() => {
-              setFriendsTabState("friends");
-            }}
-          >
-            My friends
-          </button>
-          <button
-            onClick={() => {
-              setFriendsTabState("pending");
-            }}
-          >
-            Pending requests
-          </button>
-        </div>
+        <FriendRequest />
 
-        <div className={styles.friends}>
-          {friendsTabState === "pending" && (
-            <>
-              {friendsResponse.friends
-                .filter((friend) => {
-                  return friend.status === "pending";
-                })
-                .map((friend) => {
-                  return (
-                    <Link key={friend.id} className={styles.friend}>
-                      <div className={styles.friendNamePfp}>
-                        <img
-                          src={friend.pfp}
-                          alt="pfp"
-                          className={styles.friendPfp}
-                        />
-                        <p>{friend.name}</p>
-                      </div>
-                      <div className={styles.iconContainer}>
-                        <Ban />
-                        <CircleCheck />
-                      </div>
-                    </Link>
-                  );
-                })}
-            </>
-          )}
+        <div>
+          <div className={styles.friendsToggler}>
+            <button
+              onClick={() => {
+                setFriendsTabState("friends");
+              }}
+            >
+              My friends
+            </button>
+            <button
+              onClick={() => {
+                setFriendsTabState("pending");
+              }}
+            >
+              Pending requests
+            </button>
+          </div>
 
-          {friendsTabState === "friends" && (
-            <>
-              {friendsResponse.friends
-                .filter((friend) => {
-                  return friend.status === "friends";
-                })
-                .map((friend) => {
-                  return (
-                    <Link key={friend.id} className={styles.friend}>
-                      <div className={styles.friendNamePfp}>
-                        <img
-                          src={friend.pfp}
-                          alt="pfp"
-                          className={styles.friendPfp}
-                        />
-                        <p>{friend.name}</p>
-                      </div>
-                      <div className={styles.iconContainer}>
-                        <MessageCircle />
-                        <EllipsisVertical />
-                      </div>
-                    </Link>
-                  );
-                })}
-            </>
-          )}
+          <div className={styles.friends}>
+            {friendsTabState === "pending" && (
+              <>
+                {friendsResponse.friends
+                  .filter((friend) => {
+                    return friend.status === "pending";
+                  })
+                  .map((friend) => {
+                    return (
+                      <Link key={friend.id} className={styles.friend}>
+                        <div className={styles.friendNamePfp}>
+                          <img
+                            src={friend.pfp}
+                            alt="pfp"
+                            className={styles.friendPfp}
+                          />
+                          <p>{friend.name}</p>
+                        </div>
+                        <div className={styles.iconContainer}>
+                          <Ban />
+                          <CircleCheck />
+                        </div>
+                      </Link>
+                    );
+                  })}
+              </>
+            )}
+
+            {friendsTabState === "friends" && (
+              <>
+                {friendsResponse.friends
+                  .filter((friend) => {
+                    return friend.status === "friends";
+                  })
+                  .map((friend) => {
+                    return (
+                      <Link key={friend.id} className={styles.friend}>
+                        <div className={styles.friendNamePfp}>
+                          <img
+                            src={friend.pfp}
+                            alt="pfp"
+                            className={styles.friendPfp}
+                          />
+                          <p>{friend.name}</p>
+                        </div>
+                        <div className={styles.iconContainer}>
+                          <MessageCircle />
+                          <EllipsisVertical />
+                        </div>
+                      </Link>
+                    );
+                  })}
+              </>
+            )}
+          </div>
         </div>
       </div>
     </>

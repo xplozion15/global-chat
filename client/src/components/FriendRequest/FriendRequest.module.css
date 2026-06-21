@@ -1,0 +1,22 @@
+.addFriendContainer {
+  display: flex;
+  gap: var(--space-small);
+  height: 2rem;
+  width: 100%;
+  border: 2px solid var(--text-color-one);
+  justify-content: space-between;
+  padding: 0.2rem;
+}
+
+.validationText {
+  font-size: var(--text-small);
+}
+
+.username {
+  width: 65%;
+}
+
+.addFriendBtn {
+  cursor: pointer;
+  width: 35%;
+}

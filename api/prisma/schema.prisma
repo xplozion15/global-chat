@@ -13,16 +13,33 @@ enum UserStatus {
 }
 
 model User {
-  id           String     @id @default(uuid())
-  nickname     String
-  username     String     @unique
-  password     String?
-  email        String     @unique
-  googleId     String?    @unique
-  bio          String     @default("hi im new here")
-  status       UserStatus @default(IDLE)
-  bannerColour String     @default("#5865F2")
-  reactions    Reaction[]
+  id               String          @id @default(uuid())
+  nickname         String
+  username         String          @unique
+  password         String?
+  email            String          @unique
+  googleId         String?         @unique
+  bio              String          @default("hi im new here")
+  status           UserStatus      @default(IDLE)
+  bannerColour     String          @default("#5865F2")
+  reactions        Reaction[]
+  sentRequests     FriendRequest[] @relation("senderId")
+  receivedRequests FriendRequest[] @relation("receiverId")
+}
+
+enum FriendRequestStatus {
+  ACCEPTED
+  PENDING
+  REJECTED
+}
+
+model FriendRequest {
+  id            String              @id @default(uuid())
+  requestStatus FriendRequestStatus @default(PENDING)
+  sender        User                @relation("senderId", fields: [senderId], references: [id])
+  senderId      String
+  receiver      User                @relation("receiverId", fields: [receiverId], references: [id])
+  receiverId    String
 }
 
 model Session {
