@@ -6,9 +6,21 @@ import { EllipsisVertical } from "lucide-react";
 import { CircleCheck } from "lucide-react";
 import { Ban } from "lucide-react";
 import { FriendRequest } from "../FriendRequest/FriendRequest";
+import { fetchPendingRequests } from "../../services/friendRequestServices";
 
 const FriendsList = () => {
   const [friendsTabState, setFriendsTabState] = useState("friends");
+  const [pendingRequests, setPendingRequests] = useState([]);
+
+  const pendingRequestsHandler = async () => {
+    try {
+      const pendingRequestsData = await fetchPendingRequests();
+      setPendingRequests(pendingRequestsData.pendingRequests);
+      console.log(pendingRequestsData.pendingRequests);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   const friendsResponse = {
     success: true,
@@ -155,6 +167,7 @@ const FriendsList = () => {
             <button
               onClick={() => {
                 setFriendsTabState("pending");
+                pendingRequestsHandler();
               }}
             >
               Pending requests
@@ -164,20 +177,17 @@ const FriendsList = () => {
           <div className={styles.friends}>
             {friendsTabState === "pending" && (
               <>
-                {friendsResponse.friends
-                  .filter((friend) => {
-                    return friend.status === "pending";
-                  })
-                  .map((friend) => {
+                {pendingRequests
+                  .map((friendRequest) => {
                     return (
-                      <Link key={friend.id} className={styles.friend}>
+                      <Link key={friendRequest.id} className={styles.friend}>
                         <div className={styles.friendNamePfp}>
                           <img
-                            src={friend.pfp}
+                            src={friendRequest.pfp}
                             alt="pfp"
                             className={styles.friendPfp}
                           />
-                          <p>{friend.name}</p>
+                          <p>{friendRequest.name}</p>
                         </div>
                         <div className={styles.iconContainer}>
                           <Ban />
