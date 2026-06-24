@@ -20,3 +20,7 @@
   cursor: pointer;
   width: 35%;
 }
+
+.validationText {
+  font-size: var(--text-extra-small);
+}

@@ -67,4 +67,77 @@ const fetchPendingRequests = async (req, res) => {
   }
 };
 
-export { sendFriendRequest, fetchPendingRequests };
+const acceptFriendRequest = async (req, res) => {
+  const userId = req.user.id;
+  const { requestId } = req.params;
+
+  if (!userId) {
+    return res.status(401).json({
+      message: "User not authenticated",
+    });
+  }
+
+  try {
+    const acceptedFriendRequest = await prisma.friendRequest.update({
+      where: {
+        id: requestId,
+        receiverId: userId,
+        requestStatus: "PENDING",
+      },
+      data: {
+        requestStatus: "ACCEPTED",
+      },
+    });
+
+    return res.status(200).json({
+      message: "Friend request accepted successfully",
+      acceptedFriendRequest: acceptedFriendRequest,
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({
+      message: "Failed to accept the request",
+    });
+  }
+};
+
+const rejectFriendRequest = async (req, res) => {
+  const userId = req.user.id;
+  const { requestId } = req.params;
+
+  if (!userId) {
+    return res.status(401).json({
+      message: "User not authenticated",
+    });
+  }
+
+  try {
+    const rejectedFriendRequest = await prisma.friendRequest.update({
+      where: {
+        id: requestId,
+        receiverId: userId,
+        requestStatus: "PENDING",
+      },
+      data: {
+        requestStatus: "REJECTED",
+      },
+    });
+
+    return res.status(200).json({
+      message: "Friend request accepted successfully",
+      rejectedFriendRequest: rejectedFriendRequest,
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({
+      message: "Failed to accept the request",
+    });
+  }
+};
+
+export {
+  sendFriendRequest,
+  fetchPendingRequests,
+  acceptFriendRequest,
+  rejectFriendRequest,
+};

@@ -36,4 +36,39 @@ const fetchPendingRequests = async () => {
   return pendingRequests;
 };
 
-export { sendFriendRequest, fetchPendingRequests };
+const acceptFriendRequest = async (requestId) => {
+  const response = await fetch(`${API_BASE_URL}/friendrequests/${requestId}/accept`, {
+    method: "PATCH",
+    credentials: "include",
+  });
+
+  const acceptedRequest = await response.json();
+
+  if (!response.ok) {
+    throw new Error(acceptedRequest.message);
+  }
+
+  return acceptedRequest;
+};
+
+const rejectFriendRequest = async (requestId) => {
+  const response = await fetch(`${API_BASE_URL}/friendrequests/${requestId}/reject`, {
+    method: "PATCH",
+    credentials: "include",
+  });
+
+  const rejectedRequest = await response.json();
+
+  if (!response.ok) {
+    throw new Error(rejectedRequest.message);
+  }
+
+  return rejectedRequest;
+};
+
+export {
+  sendFriendRequest,
+  fetchPendingRequests,
+  acceptFriendRequest,
+  rejectFriendRequest,
+};
