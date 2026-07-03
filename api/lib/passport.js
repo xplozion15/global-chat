@@ -14,7 +14,6 @@ passport.use(
       callbackURL: `${process.env.BASE_URL}/auth/google/callback`,
     },
     async function (accessToken, refreshToken, profile, cb) {
-      console.log(profile)
       try {
         let user = await prisma.user.findUnique({
           where: {
@@ -28,7 +27,7 @@ passport.use(
               username: profile.displayName,
               googleId: profile.id,
               email: profile.emails[0].value,
-              nickname : profile.displayName,
+              nickname: profile.displayName,
             },
           });
         }
@@ -67,7 +66,6 @@ passport.use(
 );
 
 passport.serializeUser((user, done) => {
-   console.log("SERIALIZE", user.id);
   done(null, user.id);
 });
 
@@ -78,9 +76,8 @@ passport.deserializeUser(async (id, done) => {
         id: id,
       },
     });
-    
+
     const user = fetchUser;
-    console.log("FOUND USER", user);
     if (!user) {
       return done(null, false);
     }

@@ -30,7 +30,6 @@ const registerUser = async (req, res) => {
 
 const loginUser = (req, res, next) => {
   passport.authenticate("local", (err, user, info) => {
-    console.log(info);
     if (err) {
       return res.status(500).json({
         message: err.message,
@@ -63,8 +62,6 @@ const loginUser = (req, res, next) => {
 };
 
 const getMe = async (req, res) => {
-  console.log("req.user:", req.user);
-  console.log("req.session:", req.session);
   const userId = req.user.id;
 
   try {

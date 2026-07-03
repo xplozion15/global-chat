@@ -36,7 +36,7 @@ const sendFriendRequest = async (req, res) => {
 };
 
 const fetchPendingRequests = async (req, res) => {
-  const userId = req.user.id;
+  const userId = req.user?.id;
 
   if (!userId) {
     return res.status(401).json({

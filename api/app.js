@@ -12,6 +12,7 @@ import cors from "cors";
 import { authRouter } from "./routes/auth.routes.js";
 import { chatroomRouter } from "./routes/chatroom.routes.js";
 import { friendRequestRouter } from "./routes/friendRequest.routes.js";
+import { friendRouter } from "./routes/friends.routes.js";
 
 //credentials and configs
 const connectionString = `${process.env.DATABASE_URL}`;
@@ -56,6 +57,7 @@ app.use(passport.session());
 app.use("/auth", authRouter);
 app.use("/chatrooms", chatroomRouter);
 app.use("/friendrequests", friendRequestRouter);
+app.use("/friends", friendRouter);
 
 //listener
 app.listen(port, () => {

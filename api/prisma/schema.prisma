@@ -40,6 +40,8 @@ model FriendRequest {
   senderId      String
   receiver      User                @relation("receiverId", fields: [receiverId], references: [id])
   receiverId    String
+
+  @@unique([senderId, receiverId])
 }
 
 model Session {

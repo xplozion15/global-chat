@@ -1,29 +1,30 @@
-import { Link } from "react-router";
 import styles from "./FriendsList.module.css";
 import { useEffect, useState } from "react";
 import {
-  MessageCircle,
-  EllipsisVertical,
   CircleCheck,
   Ban,
+  MessageCircle,
+  EllipsisVertical,
 } from "lucide-react";
+import { Link } from "react-router";
 import { FriendRequest } from "../FriendRequest/FriendRequest";
 import {
   acceptFriendRequest,
   rejectFriendRequest,
   fetchPendingRequests,
 } from "../../services/friendRequestServices";
+import { fetchFriends } from "../../services/friendServices";
 
 const FriendsList = () => {
   const [friendsTabState, setFriendsTabState] = useState("friends");
   const [pendingRequests, setPendingRequests] = useState([]);
+  const [friends, setFriends] = useState([]);
 
   useEffect(() => {
     const pendingRequestsHandler = async () => {
       try {
         const pendingRequestsData = await fetchPendingRequests();
         setPendingRequests(pendingRequestsData.pendingRequests);
-        console.log(pendingRequestsData.pendingRequests);
       } catch (error) {
         console.error(error);
       }
@@ -46,6 +47,28 @@ const FriendsList = () => {
       console.error(error);
     }
   };
+
+  const loadFriendsHandler = async () => {
+    try {
+      const friends = await fetchFriends();
+      setFriends(friends.friends);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    const loadFriends = async () => {
+      try {
+        const friends = await fetchFriends();
+        setFriends(friends.friends);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    loadFriends();
+  }, []);
+
   return (
     <>
       <div className={styles.friendsContainer}>
@@ -58,6 +81,7 @@ const FriendsList = () => {
             <button
               onClick={() => {
                 setFriendsTabState("friends");
+                loadFriendsHandler();
               }}
             >
               My friends
@@ -105,28 +129,24 @@ const FriendsList = () => {
 
             {friendsTabState === "friends" && (
               <>
-                {/* {friendsResponse.friends
-                  .filter((friend) => {
-                    return friend.status === "friends";
-                  })
-                  .map((friend) => {
-                    return (
-                      <Link key={friend.id} className={styles.friend}>
-                        <div className={styles.friendNamePfp}>
-                          <img
-                            src={friend.pfp}
-                            alt="pfp"
-                            className={styles.friendPfp}
-                          />
-                          <p>{friend.name}</p>
-                        </div>
-                        <div className={styles.iconContainer}>
-                          <MessageCircle />
-                          <EllipsisVertical />
-                        </div>
-                      </Link>
-                    );
-                  })} */}
+                {friends.map((friend) => {
+                  return (
+                    <Link key={friend.id} className={styles.friend}>
+                      <div className={styles.friendNamePfp}>
+                        <img
+                          src={friend.pfp}
+                          alt="pfp"
+                          className={styles.friendPfp}
+                        />
+                        <p>{friend.username}</p>
+                      </div>
+                      <div className={styles.iconContainer}>
+                        <MessageCircle />
+                        <EllipsisVertical />
+                      </div>
+                    </Link>
+                  );
+                })}
               </>
             )}
           </div>

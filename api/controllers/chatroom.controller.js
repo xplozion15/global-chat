@@ -24,7 +24,6 @@ const fetchChatroomMessages = async (req, res) => {
         chatroomId: chatroomId,
       },
     });
-    console.log(chatroomMessages);
     res.status(200).json({
       message: "Messages fetched successfully",
       chatroomMessages: chatroomMessages,
