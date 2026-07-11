@@ -63,3 +63,20 @@
   display: flex;
   gap: var(--space-medium);
 }
+
+.threeDotsIcon {
+  background-color: inherit;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  cursor: pointer;
+}
+
+.friendPopover {
+  position-area: bottom right;
+  height: 5rem;
+  width: 5rem;
+  background-color: var(--tertiary-color);
+  border: 2px solid white;
+}

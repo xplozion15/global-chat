@@ -6,14 +6,13 @@ import {
   MessageCircle,
   EllipsisVertical,
 } from "lucide-react";
-import { Link } from "react-router";
 import { FriendRequest } from "../FriendRequest/FriendRequest";
 import {
   acceptFriendRequest,
   rejectFriendRequest,
   fetchPendingRequests,
 } from "../../services/friendRequestServices";
-import { fetchFriends } from "../../services/friendServices";
+import { fetchFriends, unfriendUser } from "../../services/friendServices";
 
 const FriendsList = () => {
   const [friendsTabState, setFriendsTabState] = useState("friends");
@@ -68,6 +67,14 @@ const FriendsList = () => {
     };
     loadFriends();
   }, []);
+
+  const unfriendUserHandler = async (friendId) => {
+    try {
+      await unfriendUser(friendId);
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
 
   return (
     <>
@@ -131,7 +138,7 @@ const FriendsList = () => {
               <>
                 {friends.map((friend) => {
                   return (
-                    <Link key={friend.id} className={styles.friend}>
+                    <div key={friend.id} className={styles.friend}>
                       <div className={styles.friendNamePfp}>
                         <img
                           src={friend.pfp}
@@ -142,9 +149,30 @@ const FriendsList = () => {
                       </div>
                       <div className={styles.iconContainer}>
                         <MessageCircle />
-                        <EllipsisVertical />
+                        <button
+                          popoverTarget={`friendmenu-${friend.id}`}
+                          className={styles.threeDotsIcon}
+                        >
+                          <EllipsisVertical />
+                        </button>
+                        <div
+                          id={`friendmenu-${friend.id}`}
+                          popover="auto"
+                          className={styles.friendPopover}
+                        >
+                          <button
+                            popoverTarget={`friendmenu-${friend.id}`}
+                            popoverTargetAction="hide"
+                            onClick={async () => {
+                              await unfriendUserHandler(friend.id);
+                              await loadFriendsHandler();
+                            }}
+                          >
+                            Unfriend
+                          </button>
+                        </div>
                       </div>
-                    </Link>
+                    </div>
                   );
                 })}
               </>

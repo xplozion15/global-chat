@@ -1,18 +1,4 @@
 import { prisma } from "../lib/prisma.js";
-// model User {
-//   id               String          @id @default(uuid())
-//   nickname         String
-//   username         String          @unique
-//   password         String?
-//   email            String          @unique
-//   googleId         String?         @unique
-//   bio              String          @default("hi im new here")
-//   status           UserStatus      @default(IDLE)
-//   bannerColour     String          @default("#5865F2")
-//   reactions        Reaction[]
-//   sentRequests     FriendRequest[] @relation("senderId")
-//   receivedRequests FriendRequest[] @relation("receiverId")
-// }
 
 const fetchFriends = async (req, res) => {
   const userId = req.user.id;
@@ -57,4 +43,47 @@ const fetchFriends = async (req, res) => {
   }
 };
 
-export { fetchFriends };
+const UnfriendUser = async (req, res) => {
+  const userId = req.body.user;
+  const { friendId } = req.body;
+
+  try {
+    const { count } = await prisma.friendRequest.deleteMany({
+      where: {
+        OR: [
+          {
+            AND: [
+              { receiverId: userId },
+              { senderId: friendId },
+              { requestStatus: "ACCEPTED" },
+            ],
+          },
+          {
+            AND: [
+              { receiverId: friendId },
+              { senderId: userId },
+              { requestStatus: "ACCEPTED" },
+            ],
+          },
+        ],
+      },
+    });
+
+    if (count === 0) {
+      return res.status(404).json({
+        message: "Friendship not found",
+      });
+    }
+
+    return res.status(204).json({
+      message: "Unfriended successfully",
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({
+      message: "Failed to unfriend the user",
+    });
+  }
+};
+
+export { fetchFriends, UnfriendUser };

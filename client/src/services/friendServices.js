@@ -14,4 +14,24 @@ const fetchFriends = async () => {
   return friends;
 };
 
-export { fetchFriends };
+const unfriendUser = async (friendId) => {
+  const response = await fetch(`${API_BASE_URL}/friends`, {
+    method: "DELETE",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      friendId: friendId,
+    }),
+  });
+
+  const result = await response.json();
+  if (!response.ok) {
+    throw new Error(result.message || "Failed to unfriend user");
+  }
+
+  return result;
+};
+
+export { fetchFriends, unfriendUser };
