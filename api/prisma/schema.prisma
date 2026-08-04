@@ -25,6 +25,8 @@ model User {
   reactions        Reaction[]
   sentRequests     FriendRequest[] @relation("senderId")
   receivedRequests FriendRequest[] @relation("receiverId")
+
+  messages Message[]
 }
 
 enum FriendRequestStatus {
@@ -65,6 +67,8 @@ model Message {
   reaction    Reaction[]
   createdAt   DateTime   @default(now())
   messageBody String
+  senderId    String
+  sender      User       @relation(fields: [senderId], references: [id])
 }
 
 enum ReactionType {

@@ -3,6 +3,7 @@ const authRouter = express.Router();
 import {
   getMe,
   loginUser,
+  logoutUser,
   registerUser,
 } from "../controllers/auth.controller.js";
 import passport from "passport";
@@ -23,5 +24,6 @@ authRouter.get(
 authRouter.get("/getMe", getMe);
 authRouter.post("/signup", registerUser);
 authRouter.post("/login", loginUser);
+authRouter.post("/logout", logoutUser);
 
 export { authRouter };

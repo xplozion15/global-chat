@@ -1,12 +1,4 @@
-.myProfile {
-  border: 2px solid black;
-  width: 15rem;
-  position: absolute;
-  z-index: 999;
-  bottom: 140%;
-  left: 1%;
-  background-color: var(--secondary-color);
-}
+
 
 .profilePicture {
   width: 2rem;

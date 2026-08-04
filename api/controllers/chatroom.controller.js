@@ -23,6 +23,14 @@ const fetchChatroomMessages = async (req, res) => {
       where: {
         chatroomId: chatroomId,
       },
+      include: {
+        user: {
+          select: {
+            id: true,
+            nickname: true,
+          },
+        },
+      },
     });
     res.status(200).json({
       message: "Messages fetched successfully",

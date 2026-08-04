@@ -13,6 +13,20 @@ import { authRouter } from "./routes/auth.routes.js";
 import { chatroomRouter } from "./routes/chatroom.routes.js";
 import { friendRequestRouter } from "./routes/friendRequest.routes.js";
 import { friendRouter } from "./routes/friends.routes.js";
+import { sendMessage } from "./services/message.services.js";
+
+//socket.io
+import { Server } from "socket.io";
+import { createServer } from "node:http";
+//socket server
+const server = createServer(app);
+
+const io = new Server(server, {
+  cors: {
+    origin: process.env.FRONTENDURL,
+    credentials: true,
+  },
+});
 
 //credentials and configs
 const connectionString = `${process.env.DATABASE_URL}`;
@@ -59,7 +73,38 @@ app.use("/chatrooms", chatroomRouter);
 app.use("/friendrequests", friendRequestRouter);
 app.use("/friends", friendRouter);
 
-//listener
-app.listen(port, () => {
-  console.log(`Running on port ${port}`);
+io.on("connection", (socket) => {
+  console.log("A user connected");
+
+  socket.on("join-room", (roomId) => {
+    socket.join(roomId);
+    console.log(`${socket.id} joined ${roomId}`);
+  });
+
+  socket.on("leave-room", (roomId) => {
+    socket.leave(roomId);
+    console.log(`${socket.id} left ${roomId}`);
+  });
+
+  socket.on("send-message", async (data) => {
+    try {
+      const sentMessage = await sendMessage(data);
+
+      io.to(data.roomId).emit("receive-message", sentMessage);
+    } catch (error) {
+      console.error(error);
+
+      socket.emit("message-error", {
+        message: error.message,
+      });
+    }
+  });
+
+  socket.on("disconnect", () => {
+    console.log(`${socket.id} disconnected`);
+  });
+});
+
+server.listen(port, () => {
+  console.log("socket on");
 });

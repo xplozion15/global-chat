@@ -5,6 +5,7 @@ import { useState } from "react";
 
 const Message = ({ message }) => {
   const [showMessageMenu, setShowMessageMenu] = useState(false);
+  console.log(message)
   return (
     <>
       <div className={styles.message}>
@@ -16,6 +17,7 @@ const Message = ({ message }) => {
         <div>
           <p className={styles.userName}>Xplozion</p>
           <p className={styles.parentMessage}>{message.messageBody}</p>
+
           {/* <p className={styles.replyMessage}>this is a sample reply</p> */}
           {/* <div className={styles.messageReactionContainer}>
             <div className={styles.messageReaction}>😭 1</div>

@@ -91,4 +91,27 @@ const getMe = async (req, res) => {
   }
 };
 
-export { registerUser, loginUser, getMe };
+const logoutUser = async (req, res, next) => {
+  req.logout((err) => {
+    if (err) {
+      return next(err);
+    }
+
+    //destroy the session from the server (db)
+    req.session.destroy((destroyErr) => {
+      if (destroyErr) {
+        return next(destroyErr);
+      }
+
+      //clear the cookies
+      res.clearCookie("connect.sid");
+
+      //return a response
+      return res.status(200).json({
+        message: "Logged out successfully",
+      });
+    });
+  });
+};
+
+export { registerUser, loginUser, getMe, logoutUser };

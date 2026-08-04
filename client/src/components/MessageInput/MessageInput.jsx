@@ -2,11 +2,29 @@ import styles from "./MessageInput.module.css";
 import { Plus } from "lucide-react";
 import { Smile } from "lucide-react";
 import { useState } from "react";
-import data from "@emoji-mart/data";
-import Picker from "@emoji-mart/react";
+import { socket } from "../../socket";
 
-const MessageInput = () => {
+const MessageInput = ({ chatroomId }) => {
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
+  const [messageText, setMessageText] = useState("");
+
+  const onMessageChange = (e) => {
+    setMessageText(e.target.value);
+  };
+
+  const sendMessage = (e) => {
+    e.preventDefault();
+    if (!messageText.trim()) return;
+
+    socket.emit("send-message", {
+      roomId: chatroomId,
+      messageBody: messageText,
+      replyId: null,
+    });
+
+    setMessageText("");
+  };
+
   return (
     <>
       <div className={styles.messageInput}>
@@ -16,7 +34,12 @@ const MessageInput = () => {
         </label>
 
         <label htmlFor="messageInputField" hidden></label>
-        <input type="text" className={styles.messageInputField} />
+        <input
+          type="text"
+          className={styles.messageInputField}
+          value={messageText}
+          onChange={onMessageChange}
+        />
         <div className={styles.emojiSendButtonContainer}>
           <button className={styles.emojiPicker}>
             <Smile
@@ -26,11 +49,13 @@ const MessageInput = () => {
             />
             {showEmojiPicker && (
               <div className={styles.emojiPickerElementWrapper}>
-                <Picker data={data} onEmojiSelect={console.log} />
+                <p>emoji</p>
               </div>
             )}
           </button>
-          <button className={styles.sendButton}>Send</button>
+          <button className={styles.sendButton} onClick={sendMessage}>
+            Send
+          </button>
         </div>
       </div>
     </>

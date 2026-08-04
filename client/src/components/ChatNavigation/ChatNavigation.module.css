@@ -77,3 +77,12 @@
   position: relative;
   cursor: pointer;
 }
+
+
+.logoutBtn {
+  background-color: inherit;
+  color: var(--text-color-one);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}

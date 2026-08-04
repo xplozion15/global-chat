@@ -10,7 +10,6 @@ const MyProfile = () => {
       try {
         const currentUser = await getMe();
         setMyProfileDetails(currentUser);
-        
       } catch (error) {
         console.error(error);
       }
@@ -20,28 +19,26 @@ const MyProfile = () => {
 
   return (
     <>
-      <div className={styles.myProfile}>
-        {!myProfileDetails ? (
-          <p>loading...</p>
-        ) : (
+      {!myProfileDetails ? (
+        <p>loading...</p>
+      ) : (
+        <div>
+          <div className={styles.banner}></div>
+          <img
+            src="https://res.cloudinary.com/dkidfx99m/image/upload/v1719927101/cui0bm8jfffqmoeh7rya.jpg"
+            alt="profile-picture"
+            className={styles.profilePicture}
+          />
+          <p className={styles.nickname}>{myProfileDetails.nickname}</p>
+          <p className={styles.username}>{myProfileDetails.username}</p>
+          <p className={styles.bio}>{myProfileDetails.bio}</p>
           <div>
-            <div className={styles.banner}></div>
-            <img
-              src="https://res.cloudinary.com/dkidfx99m/image/upload/v1719927101/cui0bm8jfffqmoeh7rya.jpg"
-              alt="profile-picture"
-              className={styles.profilePicture}
-            />
-            <p className={styles.nickname}>{myProfileDetails.nickname}</p>
-            <p className={styles.username}>{myProfileDetails.username}</p>
-            <p className={styles.bio}>{myProfileDetails.bio}</p>
-            <div>
-              <button>Idle</button>
-              <button>Online</button>
-            </div>
-            <button>Edit profile</button>
+            <button>Idle</button>
+            <button>Online</button>
           </div>
-        )}
-      </div>
+          <button>Edit profile</button>
+        </div>
+      )}
     </>
   );
 };

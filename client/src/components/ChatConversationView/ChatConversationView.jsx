@@ -8,11 +8,31 @@ import {
   fetchChatroomName,
   fetchMessagesInChatroom,
 } from "../../services/chatroomServices";
+import { socket } from "../../socket";
 
 const ChatConversationView = () => {
   const [chatroomMessages, setChatroomMessages] = useState([]);
   const [chatroomName, setChatroomName] = useState("");
   const { chatroomId } = useParams();
+
+  useEffect(() => {
+    if (!chatroomId) return;
+
+    socket.emit("join-room", chatroomId);
+
+    const handleReceivedMessage = (message) => {
+      setChatroomMessages((prevChatroomMessages) => [
+        ...prevChatroomMessages,
+        message,
+      ]);
+    };
+    socket.on("receive-message", handleReceivedMessage);
+
+    return () => {
+      socket.emit("leave-room", chatroomId);
+      socket.off("receive-message", handleReceivedMessage);
+    };
+  }, [chatroomId]);
 
   useEffect(() => {
     const loadChatroomMessages = async () => {
@@ -53,7 +73,7 @@ const ChatConversationView = () => {
           })}
         </div>
         <TypingIndicator typingInfo={"Xajx, viena and 2 others are typing"} />
-        <MessageInput />
+        <MessageInput chatroomId={chatroomId} />
       </div>
     </>
   );

@@ -6,14 +6,16 @@ import { BellDot } from "lucide-react";
 import { Send } from "lucide-react";
 import { NotificationBadge } from "../NotificationBadge/NotificationBadge";
 import { MessageCircleHeart } from "lucide-react";
-import { Settings } from "lucide-react";
 import { NotificationPanel } from "../NotificationPanel/NotificationPanel";
 import { useState } from "react";
 import { MyProfile } from "../MyProfile/MyProfile";
+import { LogOut } from "lucide-react";
+import { LogoutDialog } from "../LogoutDialog/LogoutDialog";
 
 const ChatNavigation = () => {
   const [showNotifications, setShowNotifications] = useState(false);
   const [showMyProfile, setShowMyProfile] = useState(false);
+  const [isLogoutDialogOn, setIsLogoutDialogOn] = useState(false);
 
   return (
     <>
@@ -63,7 +65,12 @@ const ChatNavigation = () => {
               <p>Xplozion</p>
               {showMyProfile && <MyProfile />}
             </div>
-            <Settings />
+            <LogOut
+              onClick={() => {
+                setIsLogoutDialogOn((prevState) => !prevState);
+              }}
+            />
+            <LogoutDialog isLogoutDialogOn={isLogoutDialogOn} />
           </div>
         </div>
       </div>

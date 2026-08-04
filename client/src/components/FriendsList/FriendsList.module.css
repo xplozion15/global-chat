@@ -74,9 +74,9 @@
 }
 
 .friendPopover {
-  position-area: bottom right;
-  height: 5rem;
-  width: 5rem;
+  position-area: right bottom;
+  min-height: 5rem;
+  min-width: 5rem;
   background-color: var(--tertiary-color);
   border: 2px solid white;
 }
