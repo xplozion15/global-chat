@@ -24,7 +24,7 @@ const fetchChatroomMessages = async (req, res) => {
         chatroomId: chatroomId,
       },
       include: {
-        user: {
+        sender: {
           select: {
             id: true,
             nickname: true,

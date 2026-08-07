@@ -46,26 +46,37 @@ app.use(
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-//express esssion
-app.use(
-  expressSession({
-    cookie: {
-      maxAge: 7 * 24 * 60 * 60 * 1000, // ms
-    },
-    secret: process.env.SECRET,
-    resave: false,
-    saveUninitialized: false,
-    store: new PrismaSessionStore(prisma, {
-      checkPeriod: 2 * 60 * 1000, //ms
-      dbRecordIdIsSessionId: true,
-      dbRecordIdFunction: undefined,
-    }),
+//express session
+const sessionMiddleware = expressSession({
+  cookie: {
+    maxAge: 7 * 24 * 60 * 60 * 1000, // ms
+  },
+  secret: process.env.SECRET,
+  resave: false,
+  saveUninitialized: false,
+  store: new PrismaSessionStore(prisma, {
+    checkPeriod: 2 * 60 * 1000, //ms
+    dbRecordIdIsSessionId: true,
+    dbRecordIdFunction: undefined,
   }),
-);
+});
 
+app.use(sessionMiddleware);
 //initialize passport and session
 app.use(passport.initialize());
 app.use(passport.session());
+
+io.use((socket, next) => {
+  sessionMiddleware(socket.request, {}, next);
+});
+
+io.use((socket, next) => {
+  console.log("Session ID:", socket.request.sessionID);
+  console.log("Session:", socket.request.session);
+  passport.initialize()(socket.request, {}, () => {
+    passport.session()(socket.request, {}, next);
+  });
+});
 
 //routers
 app.use("/auth", authRouter);
@@ -73,8 +84,9 @@ app.use("/chatrooms", chatroomRouter);
 app.use("/friendrequests", friendRequestRouter);
 app.use("/friends", friendRouter);
 
+// socket connection
 io.on("connection", (socket) => {
-  console.log("A user connected");
+  console.log(socket.request.user);
 
   socket.on("join-room", (roomId) => {
     socket.join(roomId);
@@ -83,12 +95,16 @@ io.on("connection", (socket) => {
 
   socket.on("leave-room", (roomId) => {
     socket.leave(roomId);
+    ``;
     console.log(`${socket.id} left ${roomId}`);
   });
 
   socket.on("send-message", async (data) => {
     try {
-      const sentMessage = await sendMessage(data);
+      const sentMessage = await sendMessage({
+        ...data,
+        senderId: socket.request.user.id,
+      });
 
       io.to(data.roomId).emit("receive-message", sentMessage);
     } catch (error) {

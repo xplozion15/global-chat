@@ -2,7 +2,7 @@
   "type": "module",
   "dependencies": {
     "@prisma/adapter-pg": "^7.8.0",
-    "@prisma/client": "^7.8.0",
+    "@prisma/client": "^7.9.0",
     "@quixo3/prisma-session-store": "^3.1.20",
     "bcryptjs": "^3.0.3",
     "connect-pg-simple": "^10.0.0",
@@ -20,6 +20,6 @@
     "@eslint/js": "^10.0.1",
     "eslint": "^10.4.1",
     "globals": "^17.6.0",
-    "prisma": "^7.8.0"
+    "prisma": "^7.9.0"
   }
 }

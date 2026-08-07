@@ -5,7 +5,7 @@ import { useState } from "react";
 
 const Message = ({ message }) => {
   const [showMessageMenu, setShowMessageMenu] = useState(false);
-  console.log(message)
+  console.log(message);
   return (
     <>
       <div className={styles.message}>
@@ -15,7 +15,7 @@ const Message = ({ message }) => {
           className={styles.messagePfp}
         />
         <div>
-          <p className={styles.userName}>Xplozion</p>
+          <p className={styles.userName}>{message.sender["nickname"]}</p>
           <p className={styles.parentMessage}>{message.messageBody}</p>
 
           {/* <p className={styles.replyMessage}>this is a sample reply</p> */}
