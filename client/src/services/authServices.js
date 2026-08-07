@@ -59,4 +59,17 @@ const getMe = async () => {
   return result.user;
 };
 
-export { registerUser, loginUser, getMe };
+const logoutUser = async () => {
+  const response = await fetch(`${API_BASE_URL}/auth/logout`, {
+    method: "POST",
+    credentials: "include",
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to logout");
+  }
+  const result = await response.json();
+  return result;
+};
+
+export { registerUser, loginUser, getMe, logoutUser };

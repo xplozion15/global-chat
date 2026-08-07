@@ -70,7 +70,10 @@ const ChatNavigation = () => {
                 setIsLogoutDialogOn((prevState) => !prevState);
               }}
             />
-            <LogoutDialog isLogoutDialogOn={isLogoutDialogOn} />
+            <LogoutDialog
+              isLogoutDialogOn={isLogoutDialogOn}
+              setIsLogoutDialogOn={setIsLogoutDialogOn}
+            />
           </div>
         </div>
       </div>
