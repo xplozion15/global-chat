@@ -18,6 +18,7 @@ import { sendMessage } from "./services/message.services.js";
 //socket.io
 import { Server } from "socket.io";
 import { createServer } from "node:http";
+import { profileRouter } from "./routes/profile.routes.js";
 //socket server
 const server = createServer(app);
 
@@ -83,6 +84,7 @@ app.use("/auth", authRouter);
 app.use("/chatrooms", chatroomRouter);
 app.use("/friendrequests", friendRequestRouter);
 app.use("/friends", friendRouter);
+app.use("/profiles", profileRouter);
 
 // socket connection
 io.on("connection", (socket) => {
