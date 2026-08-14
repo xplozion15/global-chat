@@ -7,6 +7,7 @@ import { socket } from "../../socket";
 const MessageInput = ({ chatroomId }) => {
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const [messageText, setMessageText] = useState("");
+  const [selectedFile, setSelectedFile] = useState(null);
 
   const onMessageChange = (e) => {
     setMessageText(e.target.value);
@@ -14,21 +15,31 @@ const MessageInput = ({ chatroomId }) => {
 
   const sendMessage = (e) => {
     e.preventDefault();
-    if (!messageText.trim()) return;
+
+    if (!messageText.trim() && !selectedFile) return;
 
     socket.emit("send-message", {
       roomId: chatroomId,
       messageBody: messageText,
       replyId: null,
+      image: selectedFile || null,
     });
 
     setMessageText("");
+    setSelectedFile(null);
   };
 
+  
   return (
     <>
       <div className={styles.messageInput}>
-        <input type="file" name="upload-file" id="upload-file" hidden />
+        <input
+          type="file"
+          name="upload-file"
+          id="upload-file"
+          onChange={(e) => setSelectedFile(e.target.files[0])}
+          hidden
+        />
         <label htmlFor="upload-file">
           <Plus className={styles.plusIcon} />
         </label>

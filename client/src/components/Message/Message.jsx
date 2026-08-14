@@ -49,7 +49,12 @@ const Message = ({ message }) => {
 
         <div>
           <p className={styles.userName}>{message.sender["nickname"]}</p>
-          <p className={styles.parentMessage}>{message.messageBody}</p>
+          {message.messageBody && (
+            <p className={styles.parentMessage}>{message.messageBody}</p>
+          )}
+          {message.imageUrl && (
+            <img src={message.imageUrl} alt="chat-image" loading="lazy" className={styles.chatImage}/>
+          )}
 
           {/* <p className={styles.replyMessage}>this is a sample reply</p> */}
           {/* <div className={styles.messageReactionContainer}>

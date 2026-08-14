@@ -75,7 +75,7 @@ const UnfriendUser = async (req, res) => {
       });
     }
 
-    return res.status(204).json({
+    return res.status(200).json({
       message: "Unfriended successfully",
     });
   } catch (error) {

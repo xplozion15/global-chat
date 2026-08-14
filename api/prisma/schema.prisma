@@ -66,9 +66,10 @@ model Message {
   replyId     String?
   reaction    Reaction[]
   createdAt   DateTime   @default(now())
-  messageBody String
+  messageBody String?
   senderId    String
   sender      User       @relation(fields: [senderId], references: [id])
+  imageUrl    String?
 }
 
 enum ReactionType {

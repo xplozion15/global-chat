@@ -76,3 +76,7 @@
   gap: var(--space-small);
 }
 
+.chatImage {
+  width: 40%;
+  height: auto;
+}

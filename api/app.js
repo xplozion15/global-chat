@@ -27,6 +27,7 @@ const io = new Server(server, {
     origin: process.env.FRONTENDURL,
     credentials: true,
   },
+  maxHttpBufferSize: 10 * 1024 * 1024, // 10 MB // only 10 mb files allowed max
 });
 
 //credentials and configs
@@ -80,6 +81,7 @@ io.use((socket, next) => {
 });
 
 //routers
+
 app.use("/auth", authRouter);
 app.use("/chatrooms", chatroomRouter);
 app.use("/friendrequests", friendRequestRouter);
@@ -102,6 +104,9 @@ io.on("connection", (socket) => {
   });
 
   socket.on("send-message", async (data) => {
+    console.log(data.roomId);
+    console.log(data.messageBody);
+    console.log(data.image);
     try {
       const sentMessage = await sendMessage({
         ...data,
