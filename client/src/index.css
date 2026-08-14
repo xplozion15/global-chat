@@ -45,7 +45,6 @@ body {
 * {
   border: none;
   border-radius: var(--space-medium);
-  padding: 0.1rem;
 }
 
 a {

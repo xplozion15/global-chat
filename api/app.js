@@ -99,7 +99,6 @@ io.on("connection", (socket) => {
 
   socket.on("leave-room", (roomId) => {
     socket.leave(roomId);
-    ``;
     console.log(`${socket.id} left ${roomId}`);
   });
 

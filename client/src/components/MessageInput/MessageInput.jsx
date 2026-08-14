@@ -3,6 +3,7 @@ import { Plus } from "lucide-react";
 import { Smile } from "lucide-react";
 import { useState } from "react";
 import { socket } from "../../socket";
+import EmojiPicker from "emoji-picker-react";
 
 const MessageInput = ({ chatroomId }) => {
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
@@ -29,7 +30,6 @@ const MessageInput = ({ chatroomId }) => {
     setSelectedFile(null);
   };
 
-  
   return (
     <>
       <div className={styles.messageInput}>
@@ -50,6 +50,11 @@ const MessageInput = ({ chatroomId }) => {
           className={styles.messageInputField}
           value={messageText}
           onChange={onMessageChange}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              sendMessage(e);
+            }
+          }}
         />
         <div className={styles.emojiSendButtonContainer}>
           <button className={styles.emojiPicker}>
@@ -58,9 +63,17 @@ const MessageInput = ({ chatroomId }) => {
                 setShowEmojiPicker(!showEmojiPicker);
               }}
             />
+
             {showEmojiPicker && (
               <div className={styles.emojiPickerElementWrapper}>
-                <p>emoji</p>
+                <EmojiPicker
+                  theme={"dark"}
+                  onEmojiClick={(emojiObject) =>
+                    setMessageText(
+                      (prevMessage) => `${prevMessage} ${emojiObject.emoji}`,
+                    )
+                  }
+                />
               </div>
             )}
           </button>
