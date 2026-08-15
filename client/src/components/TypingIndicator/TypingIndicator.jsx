@@ -1,9 +1,13 @@
 import styles from "./TypingIndicator.module.css";
+import { typingUsersText } from "../../utils/TypingUsersText";
 
-const TypingIndicator = ({ typingInfo }) => {
+const TypingIndicator = ({ typingUsers }) => {
   return (
     <>
-      <p className={styles.typingIndicator}>{typingInfo} ... </p>
+      {/* only show typing indicator when more than 0 users are typing */}
+      {typingUsers.length > 0 && (
+        <p className={styles.typingIndicator}>{typingUsersText(typingUsers)}</p>
+      )}
     </>
   );
 };

@@ -14,6 +14,33 @@ const ChatConversationView = () => {
   const [chatroomMessages, setChatroomMessages] = useState([]);
   const [chatroomName, setChatroomName] = useState("");
   const { chatroomId } = useParams();
+  const [typingUsers, setTypingUsers] = useState([]);
+
+  useEffect(() => {
+    //add users to the typing state
+    const handleUserTyping = ({ userId, nickname }) => {
+      setTypingUsers((prev) => {
+        if (prev.some((user) => user.userId === userId)) {
+          return prev;
+        }
+
+        return [...prev, { userId, nickname }];
+      });
+    };
+
+    //remove users from typing state when they stop typing
+    const handleUserStoppedTyping = ({ userId }) => {
+      setTypingUsers((prev) => prev.filter((user) => user.userId !== userId));
+    };
+
+    socket.on("userTyping", handleUserTyping);
+    socket.on("userStoppedTyping", handleUserStoppedTyping);
+
+    return () => {
+      socket.off("userTyping", handleUserTyping);
+      socket.off("userStoppedTyping", handleUserStoppedTyping);
+    };
+  }, []);
 
   useEffect(() => {
     if (!chatroomId) return;
@@ -72,7 +99,7 @@ const ChatConversationView = () => {
             return <Message message={message} key={message.id} />;
           })}
         </div>
-        <TypingIndicator typingInfo={"Xajx, viena and 2 others are typing"} />
+        <TypingIndicator typingUsers={typingUsers} />
         <MessageInput chatroomId={chatroomId} />
       </div>
     </>

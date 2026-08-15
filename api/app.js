@@ -122,6 +122,20 @@ io.on("connection", (socket) => {
     }
   });
 
+  socket.on("typing", ({ chatroomId }) => {
+    socket.to(chatroomId).emit("userTyping", {
+      userId: socket.request.user.id,
+      nickname: socket.request.user.nickname,
+    });
+  });
+
+  socket.on("stopTyping", ({ chatroomId }) => {
+    socket.to(chatroomId).emit("userStoppedTyping", {
+      userId: socket.request.user.id,
+      nickname: socket.request.user.nickname,
+    });
+  });
+
   socket.on("disconnect", () => {
     console.log(`${socket.id} disconnected`);
   });
