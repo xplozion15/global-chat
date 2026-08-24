@@ -1,14 +1,11 @@
-.messageMenu {
+.messageMenuInner {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--tertiary-color);
-  z-index: 9999;
+  background-color: var(--secondary-color);
   height: 3rem;
   gap: var(--space-medium);
-  position: absolute;
-  right: 6%;
-  top: 2%;
+  padding: var(--space-small);
 }
 
 .messageOptions,
@@ -22,4 +19,31 @@
   border-right: 1px solid gray;
   border-radius: 0;
   height: 1rem;
+}
+
+.emojiButton {
+  background-color: inherit;
+}
+
+.messageMenu {
+  position: absolute;
+  inset: auto;
+  margin: 0;
+  top: anchor(bottom);
+  right: anchor(right);
+  padding: 1px;
+  background-color: inherit;
+}
+
+.actionButtons {
+  background-color: inherit;
+}
+
+
+.actionButtons,.emojiButton {
+  /* border: 1px solid white; */
+  min-width: 2rem;
+  min-height: 2rem;
+  background-color: var(--tertiary-color);
+  cursor: pointer;
 }

@@ -1,15 +1,16 @@
 import styles from "./Message.module.css";
 import { Ellipsis } from "lucide-react";
-import { MessageMenu } from "../MessageMenu/MessageMenu";
 import { useState } from "react";
 import { Profile } from "../Profile/Profile";
 import { getProfile } from "../../services/profileServices";
 import { useRef, useEffect } from "react";
+import { MessageMenu } from "../MessageMenu/MessageMenu";
 
 const Message = ({ message }) => {
-  const [showMessageMenu, setShowMessageMenu] = useState(false);
   const [profileInfo, setProfileInfo] = useState(null);
   const profileDialogRef = useRef(null);
+  const menuId = `messageMenu-${message.id}`;
+
   console.log(message);
 
   //for handling profile clicks
@@ -38,7 +39,6 @@ const Message = ({ message }) => {
           alt="Profile Avatar"
           className={styles.messagePfp}
           onClick={() => handleProfileClick(message.sender.id)}
-          className={styles.messagePfp}
         />
         {profileInfo && (
           <Profile
@@ -53,7 +53,12 @@ const Message = ({ message }) => {
             <p className={styles.parentMessage}>{message.messageBody}</p>
           )}
           {message.imageUrl && (
-            <img src={message.imageUrl} alt="chat-image" loading="lazy" className={styles.chatImage}/>
+            <img
+              src={message.imageUrl}
+              alt="chat-image"
+              loading="lazy"
+              className={styles.chatImage}
+            />
           )}
 
           {/* <p className={styles.replyMessage}>this is a sample reply</p> */}
@@ -64,14 +69,12 @@ const Message = ({ message }) => {
         </div>
         <button
           className={styles.dotsIcon}
-          onClick={() => {
-            setShowMessageMenu((prev) => !prev);
-          }}
+          popovertarget={menuId}
+          style={{ anchorName: `--${menuId}` }}
         >
           <Ellipsis />
         </button>
-
-        {showMessageMenu && <MessageMenu />}
+        <MessageMenu id={menuId} />
       </div>
     </>
   );
