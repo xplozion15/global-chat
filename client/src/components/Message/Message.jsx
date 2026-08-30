@@ -1,15 +1,18 @@
-import styles from "./Message.module.css";
 import { Ellipsis } from "lucide-react";
+import styles from "./Message.module.css";
 import { useState } from "react";
 import { Profile } from "../Profile/Profile";
 import { getProfile } from "../../services/profileServices";
 import { useRef, useEffect } from "react";
 import { MessageMenu } from "../MessageMenu/MessageMenu";
+import { socket } from "../../socket";
+import { getReactionCountsPerEmoji } from "../../utils/messageReactionsHelper";
 
 const Message = ({ message }) => {
   const [profileInfo, setProfileInfo] = useState(null);
   const profileDialogRef = useRef(null);
   const menuId = `messageMenu-${message.id}`;
+  const [reactions, setReactions] = useState(message.reaction || []);
 
   console.log(message);
 
@@ -30,6 +33,52 @@ const Message = ({ message }) => {
       profileDialogRef.current?.showModal();
     }
   }, [profileInfo]);
+
+  useEffect(() => {
+    const reactionAddedHandler = (data) => {
+      console.log("reactionAdded received", data);
+      if (data.messageId !== message.id) return;
+      setReactions((prev) => [...prev, data.reaction]);
+    };
+
+    const reactionRemovedHandler = (data) => {
+      console.log("reactionAdded received", data);
+      if (data.messageId !== message.id) return;
+      setReactions((prev) =>
+        prev.filter((reaction) => {
+          return !(
+            reaction.senderId === data.userId && reaction.type === data.type
+          );
+        }),
+      );
+    };
+
+    socket.on("reactionAdded", reactionAddedHandler);
+    socket.on("reactionRemoved", reactionRemovedHandler);
+
+    return () => {
+      socket.off("reactionAdded", reactionAddedHandler);
+      socket.off("reactionRemoved", reactionRemovedHandler);
+    };
+  }, [message.id]);
+
+  const toggleReactionHandler = (type) => {
+    
+    socket.emit("toggleReaction", {
+      messageId: message.id,
+      type,
+      chatroomId: message.chatroomId,
+    });
+  };
+
+  //for emoji mapping
+  const reactionEmojis = {
+    LOVE: "❤️",
+    LAUGH: "😂",
+    WOW: "😮",
+    CRY: "😭",
+    OK: "👍",
+  };
 
   return (
     <>
@@ -63,10 +112,25 @@ const Message = ({ message }) => {
 
           {/* <p className={styles.replyMessage}>this is a sample reply</p> */}
           {/* <div className={styles.messageReactionContainer}>
-            <div className={styles.messageReaction}>😭 1</div>
+            <button className={styles.messageReaction}>😭 1</button>
             <div className={styles.messageReaction}>😂 3</div>
           </div> */}
+
+          {Object.entries(getReactionCountsPerEmoji(reactions)).map(
+            ([type, count]) => {
+              return (
+                <button
+                  className={styles.messageReaction}
+                  key={type}
+                  onClick={() => toggleReactionHandler(type)}
+                >
+                  {reactionEmojis[type]} {count}
+                </button>
+              );
+            },
+          )}
         </div>
+
         <button
           className={styles.dotsIcon}
           popovertarget={menuId}
@@ -74,7 +138,10 @@ const Message = ({ message }) => {
         >
           <Ellipsis />
         </button>
-        <MessageMenu id={menuId} />
+        <MessageMenu
+          id={menuId}
+          toggleReactionHandler={toggleReactionHandler}
+        />
       </div>
     </>
   );

@@ -136,6 +136,47 @@ io.on("connection", (socket) => {
     });
   });
 
+  socket.on("toggleReaction", async ({ messageId, type, chatroomId }) => {
+
+
+    const userId = socket.request.user.id;
+    const existingReaction = await prisma.reaction.findFirst({
+      where: {
+        senderId: userId,
+        messageId: messageId,
+        type: type,
+      },
+    });
+    if (existingReaction) {
+      await prisma.reaction.delete({
+        where: {
+          id: existingReaction.id,
+        },
+      });
+      io.to(`${chatroomId}`).emit("reactionRemoved", {
+        messageId,
+        userId,
+        type,
+      });
+
+      return;
+    }
+
+    const reaction = await prisma.reaction.create({
+      data: {
+        senderId: userId,
+        messageId,
+        type,
+      },
+    });
+    console.log("4. EMITTING reactionAdded:", reaction);
+
+    io.to(`${chatroomId}`).emit("reactionAdded", {
+      messageId,
+      reaction,
+    });
+  });
+
   socket.on("disconnect", () => {
     console.log(`${socket.id} disconnected`);
   });

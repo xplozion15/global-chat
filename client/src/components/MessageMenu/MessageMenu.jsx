@@ -3,7 +3,7 @@ import { Pencil } from "lucide-react";
 import { Reply } from "lucide-react";
 import { Trash } from "lucide-react";
 
-const MessageMenu = ({ id }) => {
+const MessageMenu = ({ id, toggleReactionHandler }) => {
   return (
     <div
       id={id}
@@ -17,6 +17,7 @@ const MessageMenu = ({ id }) => {
             className={styles.emojiButton}
             popoverTarget={id}
             popoverTargetAction="hide"
+            onClick={() => toggleReactionHandler("LOVE")}
           >
             ❤️
           </button>
@@ -24,6 +25,7 @@ const MessageMenu = ({ id }) => {
             className={styles.emojiButton}
             popoverTarget={id}
             popoverTargetAction="hide"
+            onClick={() => toggleReactionHandler("LAUGH")}
           >
             😂
           </button>
@@ -31,6 +33,7 @@ const MessageMenu = ({ id }) => {
             className={styles.emojiButton}
             popoverTarget={id}
             popoverTargetAction="hide"
+            onClick={() => toggleReactionHandler("WOW")}
           >
             😮
           </button>
@@ -38,6 +41,7 @@ const MessageMenu = ({ id }) => {
             className={styles.emojiButton}
             popoverTarget={id}
             popoverTargetAction="hide"
+            onClick={() => toggleReactionHandler("CRY")}
           >
             😭
           </button>
@@ -45,6 +49,7 @@ const MessageMenu = ({ id }) => {
             className={styles.emojiButton}
             popoverTarget={id}
             popoverTargetAction="hide"
+            onClick={()=>toggleReactionHandler("OK")}
           >
             👍
           </button>

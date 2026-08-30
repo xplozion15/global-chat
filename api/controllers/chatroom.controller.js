@@ -30,6 +30,7 @@ const fetchChatroomMessages = async (req, res) => {
             nickname: true,
           },
         },
+        reaction: true,
       },
     });
     res.status(200).json({
