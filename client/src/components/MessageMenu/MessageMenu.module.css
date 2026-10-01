@@ -47,3 +47,42 @@
   background-color: var(--tertiary-color);
   cursor: pointer;
 }
+.deleteMessagePopover {
+  position: fixed;
+  inset: 50% auto auto 50%;
+  transform: translate(-50%, -50%);
+  min-width: 16rem;
+  padding: var(--space-large);
+  color: var(--text-color-one);
+  background-color: var(--secondary-color);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-small);
+}
+
+.deleteMessagePopover::backdrop {
+  background-color: rgb(0 0 0 / 45%);
+}
+
+.deleteMessageActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-small);
+}
+
+.cancelDeleteButton,
+.confirmDeleteButton {
+  padding: var(--space-small) var(--space-medium);
+  border: 0;
+  border-radius: var(--border-radius-small);
+  cursor: pointer;
+}
+
+.cancelDeleteButton {
+  color: var(--text-color-one);
+  background-color: var(--tertiary-color);
+}
+
+.confirmDeleteButton {
+  color: #ffffff;
+  background-color: #c73636;
+}

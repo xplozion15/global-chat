@@ -96,11 +96,11 @@ const ChatConversationView = () => {
         <h2 className={styles.chatName}># {chatroomName}</h2>
         <div className={styles.messages}>
           {chatroomMessages.map((message) => {
-            return <Message message={message} key={message.id} />;
+            return <Message message={message} key={message.id} setChatroomMessages={setChatroomMessages} />;
           })}
         </div>
         <TypingIndicator typingUsers={typingUsers} />
-        <MessageInput chatroomId={chatroomId} />
+        <MessageInput chatroomId={chatroomId}/>
       </div>
     </>
   );

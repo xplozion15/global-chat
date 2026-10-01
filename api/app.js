@@ -137,8 +137,6 @@ io.on("connection", (socket) => {
   });
 
   socket.on("toggleReaction", async ({ messageId, type, chatroomId }) => {
-
-
     const userId = socket.request.user.id;
     const existingReaction = await prisma.reaction.findFirst({
       where: {
@@ -169,8 +167,8 @@ io.on("connection", (socket) => {
         type,
       },
     });
-    console.log("4. EMITTING reactionAdded:", reaction);
 
+    
     io.to(`${chatroomId}`).emit("reactionAdded", {
       messageId,
       reaction,

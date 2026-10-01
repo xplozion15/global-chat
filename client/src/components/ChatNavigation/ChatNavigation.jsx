@@ -2,20 +2,16 @@ import { Link } from "react-router";
 import styles from "./ChatNavigation.module.css";
 import { MessageCircleCode } from "lucide-react";
 import { UserStar } from "lucide-react";
-import { BellDot } from "lucide-react";
 import { Send } from "lucide-react";
-import { NotificationBadge } from "../NotificationBadge/NotificationBadge";
 import { MessageCircleHeart } from "lucide-react";
-import { NotificationPanel } from "../NotificationPanel/NotificationPanel";
 import { useState } from "react";
 import { MyProfile } from "../MyProfile/MyProfile";
 import { LogOut } from "lucide-react";
 import { LogoutDialog } from "../LogoutDialog/LogoutDialog";
 
 const ChatNavigation = () => {
-  const [showNotifications, setShowNotifications] = useState(false);
   const [showMyProfile, setShowMyProfile] = useState(false);
-  const [isLogoutDialogOn, setIsLogoutDialogOn] = useState(false);
+const [isLogoutDialogOn, setIsLogoutDialogOn] = useState(false);
 
   return (
     <>
@@ -41,17 +37,7 @@ const ChatNavigation = () => {
         </div>
 
         <div className={styles.chatNavigationBottom}>
-          <button
-            className={styles.notificationButton}
-            onClick={() => {
-              setShowNotifications((prevState) => !prevState);
-            }}
-          >
-            <BellDot />
-            Notifications
-            <NotificationBadge />
-            {showNotifications && <NotificationPanel />}
-          </button>
+         
           <div
             className={styles.profileElement}
             onClick={() => setShowMyProfile((isOpen) => !isOpen)}

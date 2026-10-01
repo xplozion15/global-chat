@@ -8,13 +8,12 @@ import { MessageMenu } from "../MessageMenu/MessageMenu";
 import { socket } from "../../socket";
 import { getReactionCountsPerEmoji } from "../../utils/messageReactionsHelper";
 
-const Message = ({ message }) => {
+const Message = ({ message, setChatroomMessages }) => {
   const [profileInfo, setProfileInfo] = useState(null);
   const profileDialogRef = useRef(null);
   const menuId = `messageMenu-${message.id}`;
   const [reactions, setReactions] = useState(message.reaction || []);
 
-  console.log(message);
 
   //for handling profile clicks
   const handleProfileClick = async (profileId) => {
@@ -110,11 +109,7 @@ const Message = ({ message }) => {
             />
           )}
 
-          {/* <p className={styles.replyMessage}>this is a sample reply</p> */}
-          {/* <div className={styles.messageReactionContainer}>
-            <button className={styles.messageReaction}>😭 1</button>
-            <div className={styles.messageReaction}>😂 3</div>
-          </div> */}
+       
 
           {Object.entries(getReactionCountsPerEmoji(reactions)).map(
             ([type, count]) => {
@@ -141,6 +136,8 @@ const Message = ({ message }) => {
         <MessageMenu
           id={menuId}
           toggleReactionHandler={toggleReactionHandler}
+          messageId={message.id}
+          setChatroomMessages={setChatroomMessages}
         />
       </div>
     </>
